@@ -61,37 +61,35 @@ fun MyCircleIconButton(
         label = "",
     )
 
-    Box(modifier = modifier) {
-        Button(
-            onClick = onClick,
-            modifier = modifier
-                .then(modifier)
-                .graphicsLayer {
-                    scaleX = scale
-                    scaleY = scale
-                }
-                .pointerInput(buttonState) {
-                    awaitPointerEventScope {
-                        buttonState = if (buttonState == ButtonState.Hold) {
-                            waitForUpOrCancellation()
-                            ButtonState.Idle
-                        } else {
-                            awaitFirstDown(false)
-                            ButtonState.Hold
-                        }
+    Button(
+        onClick = onClick,
+        modifier = modifier
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
+            .pointerInput(buttonState) {
+                awaitPointerEventScope {
+                    buttonState = if (buttonState == ButtonState.Hold) {
+                        waitForUpOrCancellation()
+                        ButtonState.Idle
+                    } else {
+                        awaitFirstDown(false)
+                        ButtonState.Hold
                     }
-                },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = animColor,
-                contentColor = MyTheme.colorScheme.textNormal,
-                disabledContainerColor = animColor,
-                disabledContentColor = MyTheme.colorScheme.buttonTextDisabled,
-            ),
-            enabled = isEnabled,
-            shape = CircleShape,
-            contentPadding = contentPadding,
-            interactionSource = interactionSource,
-        ) {
+                }
+            },
+        colors = ButtonDefaults.buttonColors(
+            containerColor = animColor,
+            contentColor = MyTheme.colorScheme.textNormal,
+            disabledContainerColor = animColor,
+            disabledContentColor = MyTheme.colorScheme.buttonTextDisabled,
+        ),
+        enabled = isEnabled,
+        shape = CircleShape,
+        contentPadding = contentPadding,
+        interactionSource = interactionSource,
+    ) {
 //            if (isLoading) {
 //                RiveAnimation(
 //                    resId = R.raw.loading_dots,
@@ -100,19 +98,19 @@ fun MyCircleIconButton(
 //                    animationName = type.animName,
 //                )
 //            } else {
-            val textColor = if (enabled) {
-                MyTheme.colorScheme.buttonText
-            } else {
-                MyTheme.colorScheme.buttonTextDisabled
-            }
-            MyIcon(
-                modifier = Modifier
-                    .size(28.dp),
-                id = icon,
-                color = textColor
-            )
-//            }
+        val textColor = if (enabled) {
+            MyTheme.colorScheme.buttonText
+        } else {
+            MyTheme.colorScheme.buttonTextDisabled
         }
+        MyIcon(
+            modifier = Modifier
+                .size(28.dp),
+            id = icon,
+            color = textColor
+        )
+//            }
+            
     }
 }
 
