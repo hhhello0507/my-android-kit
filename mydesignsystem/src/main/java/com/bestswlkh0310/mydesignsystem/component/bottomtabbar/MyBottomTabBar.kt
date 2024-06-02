@@ -30,30 +30,17 @@ import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
 import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
 import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
-sealed class BottomTabItemType(
+abstract class BottomTabItem(
     @DrawableRes val resId: Int,
     val text: String
-) {
-    data object Home : BottomTabItemType(R.drawable.ic_home, "홈")
-    data object Forum : BottomTabItemType(R.drawable.ic_chat, "포럼")
-    data object Github : BottomTabItemType(R.drawable.ic_github, "Github")
-    data object Baekjoon : BottomTabItemType(R.drawable.ic_baekjoon, "백준")
-    data object Profile : BottomTabItemType(R.drawable.ic_person, "프로필")
-}
-
-private val bottomTabList = arrayOf(
-    BottomTabItemType.Home,
-    BottomTabItemType.Forum,
-    BottomTabItemType.Github,
-    BottomTabItemType.Baekjoon,
-    BottomTabItemType.Profile,
 )
 
 @Composable
 fun MyBottomTabBar(
     modifier: Modifier = Modifier,
-    selected: BottomTabItemType,
-    onClick: (BottomTabItemType) -> Unit
+    bottomTabList: List<BottomTabItem>,
+    selected: BottomTabItem,
+    onClick: (BottomTabItem) -> Unit
 ) {
     val shape = RoundedCornerShape(
         topStart = 16.dp,
@@ -92,7 +79,7 @@ fun MyBottomTabBar(
 @Composable
 private fun MyBottomTabItem(
     modifier: Modifier = Modifier,
-    type: BottomTabItemType,
+    type: BottomTabItem,
     selected: Boolean,
     onClick: () -> Unit
 ) {
@@ -121,10 +108,16 @@ private fun MyBottomTabItem(
     }
 }
 
+private data object Home: BottomTabItem(R.drawable.ic_home, "홈")
+private data object Github: BottomTabItem(R.drawable.ic_home, "Github")
+private data object Profile: BottomTabItem(R.drawable.ic_home, "프로필")
+
+private val items = listOf(Home, Github, Profile)
+
 @Composable
 @MyPreviews
 private fun Preview() {
-    var selectedItem: BottomTabItemType by remember { mutableStateOf(BottomTabItemType.Home) }
+    var selectedItem: BottomTabItem by remember { mutableStateOf(Home) }
     MyTheme {
         Column(
             modifier = Modifier
@@ -134,6 +127,7 @@ private fun Preview() {
             Spacer(modifier = Modifier.weight(1f))
             MyBottomTabBar(
                 modifier = Modifier,
+                bottomTabList = items,
                 selected = selectedItem,
                 onClick = {
                     selectedItem = it
