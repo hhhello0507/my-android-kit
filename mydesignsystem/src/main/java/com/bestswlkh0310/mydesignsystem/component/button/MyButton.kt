@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
 import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
@@ -62,7 +63,9 @@ fun MyButton(
     isLoading: Boolean = false,
     @DrawableRes leftIcon: Int? = null,
     @DrawableRes rightIcon: Int? = null,
+    textStyle: TextStyle? = null,
     shape: Shape? = null,
+    contentPadding: PaddingValues? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit,
 ) {
@@ -114,7 +117,7 @@ fun MyButton(
         colors = colors,
         enabled = isEnabled,
         shape = shape?: type.shape,
-        contentPadding = type.contentPadding,
+        contentPadding = contentPadding?: type.contentPadding,
         interactionSource = interactionSource,
     ) {
 //            if (isLoading) {
@@ -144,7 +147,7 @@ fun MyButton(
             }
             Text(
                 text = text,
-                style = MyTheme.typography.bodyBold,
+                style = textStyle?: MyTheme.typography.bodyBold,
                 color = textColor
             )
             rightIcon?.let {
@@ -227,6 +230,15 @@ private fun Preview() {
                 text = "시작하기",
                 type = ButtonType.Small,
                 enabled = false
+            ) {
+
+            }
+            MyButton(
+                text = "+",
+                type = ButtonType.Small,
+                enabled = false,
+                textStyle = MyTheme.typography.title1B,
+                contentPadding = PaddingValues(0.dp)
             ) {
 
             }
