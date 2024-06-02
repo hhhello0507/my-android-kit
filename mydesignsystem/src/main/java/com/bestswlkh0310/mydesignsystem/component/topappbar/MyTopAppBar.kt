@@ -33,12 +33,12 @@ fun MyTopAppBar(
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .background(backgroundColor)
             .safeDrawingPadding()
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .height(54.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
