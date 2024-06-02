@@ -20,6 +20,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "my-designsystem"
+rootProject.name = "mydesignsystem"
 include(":mydesignsystem")
  
