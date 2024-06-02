@@ -27,11 +27,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
 
 @Composable
-fun GrowTabButton(
+fun MyTabButton(
     modifier: Modifier = Modifier,
     text: String,
     type: ButtonType = ButtonType.Small,
@@ -50,12 +50,12 @@ fun GrowTabButton(
 
     val colors = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
-        contentColor = GrowTheme.colorScheme.buttonPrimary,
+        contentColor = MyTheme.colorScheme.buttonPrimary,
         disabledContainerColor = Color.Transparent,
-        disabledContentColor = GrowTheme.colorScheme.buttonTextDisabled,
+        disabledContentColor = MyTheme.colorScheme.buttonTextDisabled,
     )
 
-    val indicatorColor = GrowTheme.colorScheme.tabButtonPrimary
+    val indicatorColor = MyTheme.colorScheme.tabButtonPrimary
 
     Button(
         onClick = onClick,
@@ -107,12 +107,12 @@ fun GrowTabButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             val textColor = if (selected) {
-                GrowTheme.colorScheme.tabButtonPrimary
+                MyTheme.colorScheme.tabButtonPrimary
             } else {
-                GrowTheme.colorScheme.buttonTextDisabled
+                MyTheme.colorScheme.buttonTextDisabled
             }
             leftIcon?.let {
-                GrowIcon(
+                MyIcon(
                     modifier = Modifier
                         .size(20.dp),
                     id = it,
@@ -121,11 +121,11 @@ fun GrowTabButton(
             }
             Text(
                 text = text,
-                style = GrowTheme.typography.bodyBold,
+                style = MyTheme.typography.bodyBold,
                 color = textColor
             )
             rightIcon?.let {
-                GrowIcon(
+                MyIcon(
                     modifier = Modifier
                         .size(20.dp),
                     id = it,

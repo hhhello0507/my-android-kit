@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.bestswlkh0310.mydesignsystem.foundation.color.GrowPallete
+import com.bestswlkh0310.mydesignsystem.foundation.color.MyPallete
 
 @Composable
 fun shimmerEffect(showShimmer: Boolean = true, targetValue: Float = 1000f): Brush {
     return if (showShimmer) {
         val darkTheme = isSystemInDarkTheme()
         // Colors for the shimmer effect
-        val color = GrowPallete.Neutral50
+        val color = MyPallete.Neutral50
         val added = if (darkTheme) 0.5f else 0f
         val shimmerColors = listOf(
             color.copy(alpha = 0.15f + added),

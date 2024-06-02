@@ -11,15 +11,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,23 +24,45 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.bestswlkh0310.mydesignsystem.R
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
+
+sealed class ButtonType(
+    val contentPadding: PaddingValues,
+    val shape: Shape
+) {
+    data object Large : ButtonType(
+        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+        shape = RoundedCornerShape(10.dp)
+    )
+
+    data object Medium : ButtonType(
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
+        shape = RoundedCornerShape(8.dp)
+    )
+
+    data object Small : ButtonType(
+        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
+        shape = RoundedCornerShape(6.dp)
+    )
+}
 
 @Composable
-fun GrowCTAButton(
+fun MyButton(
     modifier: Modifier = Modifier,
     text: String,
+    type: ButtonType,
     enabled: Boolean = true,
     isLoading: Boolean = false,
     @DrawableRes leftIcon: Int? = null,
     @DrawableRes rightIcon: Int? = null,
+    shape: Shape? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit,
 ) {
@@ -51,8 +70,8 @@ fun GrowCTAButton(
 
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
     val color =
-        if (enabled) GrowTheme.colorScheme.buttonPrimary
-        else GrowTheme.colorScheme.buttonPrimaryDisabled
+        if (enabled) MyTheme.colorScheme.buttonPrimary
+        else MyTheme.colorScheme.buttonPrimaryDisabled
     val scale by animateFloatAsState(
         targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
         label = "",
@@ -66,11 +85,16 @@ fun GrowCTAButton(
         label = "",
     )
 
+    val colors = ButtonDefaults.buttonColors(
+        containerColor = animColor,
+        contentColor = MyTheme.colorScheme.textNormal,
+        disabledContainerColor = animColor,
+        disabledContentColor = MyTheme.colorScheme.buttonTextDisabled,
+    )
+
     Button(
         onClick = onClick,
         modifier = modifier
-            .fillMaxWidth()
-            .height(56.dp)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
@@ -87,15 +111,10 @@ fun GrowCTAButton(
                     }
                 }
             },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = animColor,
-            contentColor = GrowTheme.colorScheme.textNormal,
-            disabledContainerColor = animColor,
-            disabledContentColor = GrowTheme.colorScheme.buttonTextDisabled,
-        ),
+        colors = colors,
         enabled = isEnabled,
-        shape = RoundedCornerShape(12.dp),
-        contentPadding = PaddingValues(0.dp),
+        shape = shape?: type.shape,
+        contentPadding = type.contentPadding,
         interactionSource = interactionSource,
     ) {
 //            if (isLoading) {
@@ -106,77 +125,107 @@ fun GrowCTAButton(
 //                    animationName = type.animName,
 //                )
 //            } else {
-        if (isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(18.dp),
-                color = GrowTheme.colorScheme.buttonText,
-                strokeWidth = 2.dp
-            )
-        } else {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                val textColor = if (enabled) {
-                    GrowTheme.colorScheme.buttonText
-                } else {
-                    GrowTheme.colorScheme.buttonTextDisabled
-                }
-                leftIcon?.let {
-                    GrowIcon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        id = it,
-                        color = textColor
-                    )
-                }
-                Text(
-                    text = text,
-                    style = GrowTheme.typography.bodyBold,
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            val textColor = if (enabled) {
+                MyTheme.colorScheme.buttonText
+            } else {
+                MyTheme.colorScheme.buttonTextDisabled
+            }
+            leftIcon?.let {
+                MyIcon(
+                    modifier = Modifier
+                        .size(20.dp),
+                    id = it,
                     color = textColor
                 )
-                rightIcon?.let {
-                    GrowIcon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        id = it,
-                        color = textColor
-                    )
-                }
-
+            }
+            Text(
+                text = text,
+                style = MyTheme.typography.bodyBold,
+                color = textColor
+            )
+            rightIcon?.let {
+                MyIcon(
+                    modifier = Modifier
+                        .size(20.dp),
+                    id = it,
+                    color = textColor
+                )
             }
         }
+//            }
     }
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
-    GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
-                .background(GrowTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.background)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            GrowCTAButton(
+            MyButton(
                 text = "시작하기",
-                leftIcon = R.drawable.ic_check
+                type = ButtonType.Large
             ) {
 
             }
-
-            GrowCTAButton(
+            MyButton(
                 text = "시작하기",
-                leftIcon = R.drawable.ic_check,
+                type = ButtonType.Large,
                 isLoading = true
             ) {
 
             }
-
-            GrowCTAButton(
+            MyButton(
                 text = "시작하기",
-                leftIcon = R.drawable.ic_check,
+                type = ButtonType.Large,
+                enabled = false
+            ) {
+
+            }
+            MyButton(
+                text = "시작하기",
+                type = ButtonType.Medium
+            ) {
+
+            }
+            MyButton(
+                text = "시작하기",
+                type = ButtonType.Medium,
+                isLoading = true
+            ) {
+
+            }
+            MyButton(
+                text = "시작하기",
+                type = ButtonType.Medium,
+                enabled = false
+            ) {
+
+            }
+            MyButton(
+                text = "시작하기",
+                type = ButtonType.Small
+            ) {
+
+            }
+            MyButton(
+                text = "시작하기",
+                type = ButtonType.Small,
+                isLoading = true
+            ) {
+
+            }
+            MyButton(
+                text = "시작하기",
+                type = ButtonType.Small,
                 enabled = false
             ) {
 

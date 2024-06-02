@@ -2,7 +2,7 @@ package com.bestswlkh0310.mydesignsystem.foundation.color
 
 import androidx.compose.ui.graphics.Color
 
-object GrowPallete {
+object MyPallete {
     /*
     Neutral Color
      */

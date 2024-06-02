@@ -27,13 +27,13 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.R
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
 
 @Composable
-fun GrowCircleIconButton(
+fun MyCircleIconButton(
     modifier: Modifier = Modifier,
     @DrawableRes icon: Int,
     enabled: Boolean = true,
@@ -46,8 +46,8 @@ fun GrowCircleIconButton(
 
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
     val color =
-        if (enabled) GrowTheme.colorScheme.buttonPrimary
-        else GrowTheme.colorScheme.buttonPrimaryDisabled
+        if (enabled) MyTheme.colorScheme.buttonPrimary
+        else MyTheme.colorScheme.buttonPrimaryDisabled
     val scale by animateFloatAsState(
         targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
         label = "",
@@ -83,9 +83,9 @@ fun GrowCircleIconButton(
                 },
             colors = ButtonDefaults.buttonColors(
                 containerColor = animColor,
-                contentColor = GrowTheme.colorScheme.textNormal,
+                contentColor = MyTheme.colorScheme.textNormal,
                 disabledContainerColor = animColor,
-                disabledContentColor = GrowTheme.colorScheme.buttonTextDisabled,
+                disabledContentColor = MyTheme.colorScheme.buttonTextDisabled,
             ),
             enabled = isEnabled,
             shape = CircleShape,
@@ -101,11 +101,11 @@ fun GrowCircleIconButton(
 //                )
 //            } else {
             val textColor = if (enabled) {
-                GrowTheme.colorScheme.buttonText
+                MyTheme.colorScheme.buttonText
             } else {
-                GrowTheme.colorScheme.buttonTextDisabled
+                MyTheme.colorScheme.buttonTextDisabled
             }
-            GrowIcon(
+            MyIcon(
                 modifier = Modifier
                     .size(28.dp),
                 id = icon,
@@ -117,19 +117,19 @@ fun GrowCircleIconButton(
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
-    GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
-                .background(GrowTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.background)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            GrowCircleIconButton(icon = R.drawable.ic_write) {
+            MyCircleIconButton(icon = R.drawable.ic_write) {
 
             }
-            GrowCircleIconButton(icon = R.drawable.ic_write, enabled = false) {
+            MyCircleIconButton(icon = R.drawable.ic_write, enabled = false) {
 
             }
         }

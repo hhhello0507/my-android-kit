@@ -1,4 +1,4 @@
-package com.molohala.grow.designsystem.component.avatar
+package com.bestswlkh0310.mydesignsystem.component.avatar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,32 +10,33 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bestswlkh0310.mydesignsystem.component.avatar.AvatarType
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.shimmer.shimmerEffect
 
 @Composable
-fun GrowAvatarShimmer(
+fun MyAvatarShimmer(
     modifier: Modifier = Modifier,
     type: AvatarType
 ) {
     Box(
         modifier = modifier
             .size(type.size)
-            .background(com.bestswlkh0310.mydesignsystem.foundation.shimmer.shimmerEffect(), CircleShape)
+            .background(shimmerEffect(), CircleShape)
     )
 }
 
 @Composable
-@com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+@com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            GrowAvatarShimmer(type = AvatarType.Large)
-            GrowAvatarShimmer(type = AvatarType.Medium)
-            GrowAvatarShimmer(type = AvatarType.Small)
+            MyAvatarShimmer(type = AvatarType.Large)
+            MyAvatarShimmer(type = AvatarType.Medium)
+            MyAvatarShimmer(type = AvatarType.Small)
         }
     }
 }

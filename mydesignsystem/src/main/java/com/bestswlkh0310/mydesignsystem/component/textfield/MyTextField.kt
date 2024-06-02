@@ -36,7 +36,7 @@ import com.bestswlkh0310.mydesignsystem.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GrowTextField(
+fun MyTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
@@ -45,25 +45,25 @@ fun GrowTextField(
     enabled: Boolean = true,
     secured: Boolean = false,
     singleLine: Boolean = true,
-    textStyle: TextStyle = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.bodyMedium,
+    textStyle: TextStyle = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.bodyMedium,
     shape: Shape = RoundedCornerShape(12.dp),
     trailingIcon: @Composable (() -> Unit)? = null,
     colors: TextFieldColors = TextFieldDefaults.colors(
-        focusedTextColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textNormal,
+        focusedTextColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal,
         focusedContainerColor = Color.Transparent,
         focusedIndicatorColor = Color.Transparent,
         unfocusedContainerColor = Color.Transparent,
-        unfocusedTextColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textNormal,
+        unfocusedTextColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal,
         unfocusedIndicatorColor = Color.Transparent,
         disabledIndicatorColor = Color.Transparent,
-        disabledTextColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textFieldTextDisabled,
+        disabledTextColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textFieldTextDisabled,
         disabledContainerColor = Color.Transparent,
     ),
 ) {
     var isFocused by remember { mutableStateOf(false) }
     var showText by remember { mutableStateOf(false) }
     val animBorderColor by animateColorAsState(
-        targetValue = if (isFocused) com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textFieldPrimary else com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textFieldSecondary,
+        targetValue = if (isFocused) com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textFieldPrimary else com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textFieldSecondary,
         label = "",
     )
     val icon = if (!secured) {
@@ -94,11 +94,11 @@ fun GrowTextField(
             ),
         onValueChange = onValueChange,
         enabled = enabled,
-        textStyle = textStyle.copy(color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textNormal),
+        textStyle = textStyle.copy(color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal),
         singleLine = singleLine,
         keyboardOptions = if (isSecured) KeyboardOptions.Default else KeyboardOptions(keyboardType = KeyboardType.Password),
         visualTransformation = if (isSecured) PasswordVisualTransformation() else VisualTransformation.None,
-        cursorBrush = SolidColor(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textFieldPrimary),
+        cursorBrush = SolidColor(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textFieldPrimary),
         decorationBox = @Composable { innerTextField ->
             TextFieldDefaults.DecorationBox(
                 value = value,
@@ -107,7 +107,7 @@ fun GrowTextField(
                     Text(
                         text = hint,
                         style = textStyle,
-                        color = if (enabled) com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textAlt else com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textFieldTextDisabled,
+                        color = if (enabled) com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textAlt else com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textFieldTextDisabled,
                     )
                 },
                 label = null,
@@ -115,7 +115,7 @@ fun GrowTextField(
                     if (trailingIcon != null) {
                         trailingIcon()
                     } else if (value.isNotEmpty() && includeIcon) {
-                        com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon(
+                        com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon(
                             modifier = Modifier
                                 .size(24.dp)
                                 .clickable(onClick = {
@@ -126,7 +126,7 @@ fun GrowTextField(
                                     }
                                 }),
                             id = icon,
-                            color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textAlt
+                            color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textAlt
                         )
                     }
                 },
@@ -148,24 +148,24 @@ fun GrowTextField(
 }
 
 @Composable
-@com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+@com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    com.bestswlkh0310.mydesignsystem.foundation.MyTheme {
         Column(
             modifier = Modifier
-                .background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background)
+                .background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             var value by remember { mutableStateOf("야삐") }
-            GrowTextField(
+            MyTextField(
                 value = value,
                 hint = "야삐",
                 onValueChange = {
                     value = it
                 }
             )
-            GrowTextField(
+            MyTextField(
                 value = value,
                 hint = "야삐",
                 onValueChange = {
@@ -173,7 +173,7 @@ private fun Preview() {
                 },
                 enabled = false,
             )
-            GrowTextField(
+            MyTextField(
                 value = value,
                 hint = "야삐",
                 onValueChange = {

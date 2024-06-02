@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 
 @Composable
-fun GrowIcon(
+fun MyIcon(
     modifier: Modifier = Modifier,
     @DrawableRes id: Int,
     color: Color

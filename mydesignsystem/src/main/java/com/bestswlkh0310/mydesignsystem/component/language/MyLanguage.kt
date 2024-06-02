@@ -1,4 +1,4 @@
-package com.molohala.grow.designsystem.component.language
+package com.bestswlkh0310.mydesignsystem.component.language
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun GrowLanguage(
+fun MyLanguage(
     modifier: Modifier = Modifier,
     text: String
 ) {
@@ -22,30 +22,30 @@ fun GrowLanguage(
         modifier = Modifier
             .height(34.dp)
             .clip(RoundedCornerShape(24.dp))
-            .background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background),
+            .background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background),
     ) {
         Text(
             modifier = modifier
                 .padding(horizontal = 12.dp)
                 .align(Alignment.Center),
             text = text,
-            style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.labelMedium,
-            color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textDarken
+            style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.labelMedium,
+            color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textDarken
         )
     }
 }
 
 @Composable
-@com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+@com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    com.bestswlkh0310.mydesignsystem.foundation.MyTheme {
         Column(
             modifier = Modifier
-                .background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background)
+                .background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background)
                 .padding(10.dp)
         ) {
-            GrowLanguage(text = "Swift")
-            GrowLanguage(text = "Mojo")
+            MyLanguage(text = "Swift")
+            MyLanguage(text = "Mojo")
         }
     }
 }

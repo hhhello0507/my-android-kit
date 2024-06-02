@@ -7,7 +7,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
-object GrowTypographyTokens {
+object MyTypographyTokens {
 
     /*
     Title1 Typography

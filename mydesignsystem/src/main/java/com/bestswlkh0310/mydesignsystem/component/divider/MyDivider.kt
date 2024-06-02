@@ -1,4 +1,4 @@
-package com.molohala.grow.designsystem.component.divider
+package com.bestswlkh0310.mydesignsystem.component.divider
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,10 +19,10 @@ sealed class DividerType(val size: Dp) {
 }
 
 @Composable
-fun GrowDivider(
+fun MyDivider(
     modifier: Modifier = Modifier,
     thickness: DividerType = DividerType.Thin,
-    color: Color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.dividerNormal
+    color: Color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.dividerNormal
 ) {
     Box(
         modifier = modifier
@@ -33,17 +33,17 @@ fun GrowDivider(
 }
 
 @Composable
-@com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+@com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    com.bestswlkh0310.mydesignsystem.foundation.MyTheme {
         Column(
             modifier = Modifier
-                .background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background)
+                .background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background)
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(32.dp)
         ) {
-            GrowDivider()
-            GrowDivider(thickness = DividerType.Thick)
+            MyDivider()
+            MyDivider(thickness = DividerType.Thick)
         }
     }
 }

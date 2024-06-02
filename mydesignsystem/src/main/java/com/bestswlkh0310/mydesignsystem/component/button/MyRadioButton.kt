@@ -33,11 +33,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.R
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
 @Composable
-fun GrowRadioButton(
+fun MyRadioButton(
     modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean,
@@ -54,14 +54,14 @@ fun GrowRadioButton(
     )
 
     val primary = if (isSelected) {
-        GrowTheme.colorScheme.radioButtonPrimary
+        MyTheme.colorScheme.radioButtonPrimary
     } else {
-        GrowTheme.colorScheme.radioButtonPrimaryDisabled
+        MyTheme.colorScheme.radioButtonPrimaryDisabled
     }
     val secondary = if (isSelected) {
-        GrowTheme.colorScheme.radioButtonSecondary
+        MyTheme.colorScheme.radioButtonSecondary
     } else {
-        GrowTheme.colorScheme.radioButtonSecondaryDisabled
+        MyTheme.colorScheme.radioButtonSecondaryDisabled
     }
 
     val colors = ButtonDefaults.buttonColors(
@@ -112,7 +112,7 @@ fun GrowRadioButton(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon(
+            com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon(
                 modifier = Modifier
                     .size(24.dp),
                 id = if (isSelected) selectedIcon else unselectedIcon,
@@ -120,7 +120,7 @@ fun GrowRadioButton(
             )
             Text(
                 text = text,
-                style = GrowTheme.typography.bodyRegular,
+                style = MyTheme.typography.bodyRegular,
                 color = secondary
             )
         }
@@ -129,19 +129,19 @@ fun GrowRadioButton(
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
-    GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
-                .background(GrowTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.background)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            GrowRadioButton(text = "Server", isSelected = true) {
+            MyRadioButton(text = "Server", isSelected = true) {
 
             }
-            GrowRadioButton(text = "Web", isSelected = false) {
+            MyRadioButton(text = "Web", isSelected = false) {
 
             }
         }

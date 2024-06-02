@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
 
 @Composable
-fun GrowTextButton(
+fun MyTextButton(
     modifier: Modifier = Modifier,
     text: String,
     type: ButtonType,
@@ -48,9 +48,9 @@ fun GrowTextButton(
 
     val colors = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
-        contentColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.buttonPrimary,
+        contentColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.buttonPrimary,
         disabledContainerColor = Color.Transparent,
-        disabledContentColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.buttonTextDisabled,
+        disabledContentColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.buttonTextDisabled,
     )
 
     Button(
@@ -91,12 +91,12 @@ fun GrowTextButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             val textColor = if (enabled) {
-                com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.buttonPrimary
+                com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.buttonPrimary
             } else {
-                com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.buttonTextDisabled
+                com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.buttonTextDisabled
             }
             leftIcon?.let {
-                com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon(
+                com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon(
                     modifier = Modifier
                         .size(20.dp),
                     id = it,
@@ -105,11 +105,11 @@ fun GrowTextButton(
             }
             Text(
                 text = text,
-                style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.bodyBold,
+                style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.bodyBold,
                 color = textColor
             )
             rightIcon?.let {
-                com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon(
+                com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon(
                     modifier = Modifier
                         .size(20.dp),
                     id = it,

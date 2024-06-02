@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.bestswlkh0310.mydesignsystem.component.button.ButtonType
-import com.bestswlkh0310.mydesignsystem.component.button.GrowCTAButton
-import com.bestswlkh0310.mydesignsystem.component.button.GrowTextButton
-import com.bestswlkh0310.mydesignsystem.foundation.shadow.growShadow
+import com.bestswlkh0310.mydesignsystem.component.button.MyCTAButton
+import com.bestswlkh0310.mydesignsystem.component.button.MyTextButton
+import com.bestswlkh0310.mydesignsystem.foundation.shadow.myShadow
 
 @Composable
-fun GrowDialog(
+fun MyDialog(
     title: String,
     content: String? = null,
     dismissText: String = "닫기",
@@ -33,9 +33,9 @@ fun GrowDialog(
     ) {
         Box(
             modifier = Modifier
-                .growShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack2)
+                .myShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack2)
                 .background(
-                    color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background,
+                    color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background,
                     shape = RoundedCornerShape(16.dp),
                 ),
         ) {
@@ -49,14 +49,14 @@ fun GrowDialog(
                 ) {
                     Text(
                         text = title,
-                        color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textNormal,
-                        style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.headline1B,
+                        color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal,
+                        style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.headline1B,
                     )
                     content?.let {
                         Text(
                             text = it,
-                            color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textAlt,
-                            style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.bodyMedium,
+                            color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textAlt,
+                            style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.bodyMedium,
                         )
                     }
                 }
@@ -66,7 +66,7 @@ fun GrowDialog(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Spacer(modifier = Modifier.weight(1f))
-                    GrowTextButton(
+                    MyTextButton(
                         text = dismissText,
                         type = ButtonType.Medium,
                         onClick = onDismissRequest
@@ -78,7 +78,7 @@ fun GrowDialog(
 }
 
 @Composable
-fun GrowDialog(
+fun MyDialog(
     title: String,
     content: String? = null,
     cancelText: String = "닫기",
@@ -92,9 +92,9 @@ fun GrowDialog(
     ) {
         Box(
             modifier = Modifier
-                .growShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack2)
+                .myShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack2)
                 .background(
-                    color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background,
+                    color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background,
                     shape = RoundedCornerShape(16.dp),
                 ),
         ) {
@@ -108,14 +108,14 @@ fun GrowDialog(
                 ) {
                     Text(
                         text = title,
-                        color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textNormal,
-                        style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.headline1B,
+                        color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal,
+                        style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.headline1B,
                     )
                     content?.let {
                         Text(
                             text = it,
-                            color = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textAlt,
-                            style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.bodyMedium,
+                            color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textAlt,
+                            style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.bodyMedium,
                         )
                     }
                 }
@@ -124,14 +124,14 @@ fun GrowDialog(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    GrowTextButton(
+                    MyTextButton(
                         modifier = Modifier
                             .weight(1f),
                         text = cancelText,
                         type = ButtonType.Medium,
                         onClick = onCancelRequest
                     )
-                    GrowCTAButton(
+                    MyCTAButton(
                         modifier = Modifier
                             .weight(1f),
                         text = successText,

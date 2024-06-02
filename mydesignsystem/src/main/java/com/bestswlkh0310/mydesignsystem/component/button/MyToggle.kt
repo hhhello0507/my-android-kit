@@ -1,4 +1,4 @@
-package com.molohala.grow.designsystem.component.button
+package com.bestswlkh0310.mydesignsystem.component.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,18 +16,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.bestswlkh0310.mydesignsystem.foundation.shadow.growShadow
+import com.bestswlkh0310.mydesignsystem.foundation.shadow.myShadow
 
 
 @Composable
-fun GrowToggle(
+fun MyToggle(
     modifier: Modifier = Modifier,
     checked: Boolean,
     colors: SwitchColors = SwitchDefaults.colors(
-        checkedThumbColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background,
-        checkedTrackColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.buttonPrimary,
-        uncheckedThumbColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background,
-        uncheckedTrackColor = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.buttonTextDisabled,
+        checkedThumbColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background,
+        checkedTrackColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.buttonPrimary,
+        uncheckedThumbColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background,
+        uncheckedTrackColor = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.buttonTextDisabled,
         uncheckedBorderColor = Color.Transparent
     ),
     onCheckedChange: (Boolean) -> Unit
@@ -47,24 +47,24 @@ fun GrowToggle(
                         color = Color.White,
                         shape = CircleShape,
                     )
-                    .growShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack1),
+                    .myShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack1),
             )
         },
     )
 }
 
 @Composable
-@com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+@com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    com.bestswlkh0310.mydesignsystem.foundation.MyTheme {
         Column(
             modifier = Modifier
-                .background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background)
+                .background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            GrowToggle(checked = true) {}
-            GrowToggle(checked = false) {}
+            MyToggle(checked = true) {}
+            MyToggle(checked = false) {}
         }
     }
 }

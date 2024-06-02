@@ -9,7 +9,7 @@ import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 
 @Stable
-class GrowColorScheme(
+class MyColorScheme(
     textNormal: Color,
     textDarken: Color,
     textAlt: Color,
@@ -127,4 +127,4 @@ class GrowColorScheme(
         internal set
 }
 
-internal val LocalGrowColorScheme = staticCompositionLocalOf { lightColorScheme() }
+internal val LocalMyColorScheme = staticCompositionLocalOf { lightColorScheme() }

@@ -27,13 +27,13 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.R
 import com.bestswlkh0310.mydesignsystem.extension.ButtonState
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
 
 @Composable
-fun GrowLikeButton(
+fun MyLikeButton(
     modifier: Modifier = Modifier,
     like: Int,
     enabled: Boolean = true,
@@ -42,8 +42,8 @@ fun GrowLikeButton(
 ) {
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
     val color =
-        if (enabled) GrowTheme.colorScheme.likeSecondary
-        else GrowTheme.colorScheme.buttonPrimaryDisabled
+        if (enabled) MyTheme.colorScheme.likeSecondary
+        else MyTheme.colorScheme.buttonPrimaryDisabled
     val scale by animateFloatAsState(
         targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
         label = "",
@@ -78,9 +78,9 @@ fun GrowLikeButton(
             },
         colors = ButtonDefaults.buttonColors(
             containerColor = animColor,
-            contentColor = GrowTheme.colorScheme.likePrimary,
+            contentColor = MyTheme.colorScheme.likePrimary,
             disabledContainerColor = animColor,
-            disabledContentColor = GrowTheme.colorScheme.textDisabled,
+            disabledContentColor = MyTheme.colorScheme.textDisabled,
         ),
         shape = RoundedCornerShape(4.dp),
         contentPadding = PaddingValues(horizontal = 6.dp, vertical = 4.dp),
@@ -91,17 +91,17 @@ fun GrowLikeButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             val textColor = if (enabled) {
-                GrowTheme.colorScheme.likePrimary
+                MyTheme.colorScheme.likePrimary
             } else {
-                GrowTheme.colorScheme.textDisabled
+                MyTheme.colorScheme.textDisabled
             }
-            GrowIcon(
+            MyIcon(
                 id = R.drawable.ic_heart,
                 color = textColor
             )
             Text(
                 text = like.toString(),
-                style = GrowTheme.typography.bodyMedium,
+                style = MyTheme.typography.bodyMedium,
                 color = textColor
             )
         }
@@ -109,18 +109,18 @@ fun GrowLikeButton(
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
-    GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
                 .padding(4.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            GrowLikeButton(like = 0) {
+            MyLikeButton(like = 0) {
 
             }
-            GrowLikeButton(like = 311, enabled = false) {
+            MyLikeButton(like = 311, enabled = false) {
 
             }
         }

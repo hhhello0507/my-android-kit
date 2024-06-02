@@ -1,4 +1,4 @@
-package com.molohala.grow.designsystem.component.menu
+package com.bestswlkh0310.mydesignsystem.component.menu
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,7 +17,7 @@ sealed class MenuType {
     data object Destructive : MenuType()
 }
 
-data class GrowMenuData(
+data class MyMenuData(
     val label: String,
     val type: MenuType = MenuType.Normal,
     val leadingIcon: @Composable (() -> Unit)? = null,
@@ -26,17 +26,17 @@ data class GrowMenuData(
 )
 
 @Composable
-fun GrowMenu(
+fun MyMenu(
     modifier: Modifier = Modifier,
     expanded: Boolean,
-    menuList: List<GrowMenuData>,
+    menuList: List<MyMenuData>,
     onDismissRequest: () -> Unit,
     offset: DpOffset = DpOffset(0.dp, 0.dp),
     properties: PopupProperties = PopupProperties(focusable = true),
 ) {
 
     DropdownMenu(
-        modifier = modifier.background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.backgroundAlt),
+        modifier = modifier.background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.backgroundAlt),
         expanded = expanded,
         onDismissRequest = onDismissRequest,
         offset = offset,
@@ -50,8 +50,8 @@ fun GrowMenu(
                 text = {
                     Text(
                         text = it.label,
-                        color = if (it.type is MenuType.Normal) com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textNormal else com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.textWarning,
-                        style = com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.typography.bodyBold
+                        color = if (it.type is MenuType.Normal) com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal else com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textWarning,
+                        style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.bodyBold
                     )
                 }, onClick = {
                     it.onClick()
@@ -62,22 +62,22 @@ fun GrowMenu(
     }
 }
 
-@com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+@com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 @Composable
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    com.bestswlkh0310.mydesignsystem.foundation.MyTheme {
         Box(
             modifier = Modifier
-                .background(com.bestswlkh0310.mydesignsystem.foundation.GrowTheme.colorScheme.background)
+                .background(com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background)
                 .padding(10.dp)
         ) {
-            GrowMenu(
+            MyMenu(
                 expanded = true,
                 menuList = listOf(
-                    GrowMenuData(
+                    MyMenuData(
                         label = "수정하기"
                     ) {},
-                    GrowMenuData(
+                    MyMenuData(
                         type = MenuType.Destructive,
                         label = "삭제하기"
                     ) {}

@@ -14,9 +14,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 import com.bestswlkh0310.mydesignsystem.R
 
 sealed class AvatarType(
@@ -31,7 +31,7 @@ sealed class AvatarType(
 }
 
 @Composable
-fun GrowAvatar(
+fun MyAvatar(
     modifier: Modifier = Modifier,
     image: String? = null,
     type: AvatarType
@@ -41,15 +41,15 @@ fun GrowAvatar(
             modifier = modifier
                 .size(type.size)
                 .background(
-                    color = GrowTheme.colorScheme.avatarBackground,
+                    color = MyTheme.colorScheme.avatarBackground,
                     shape = CircleShape,
                 ),
             contentAlignment = Alignment.Center,
         ) {
-            GrowIcon(
+            MyIcon(
                 modifier = Modifier.size(type.size / 2),
                 id = R.drawable.ic_person,
-                color = GrowTheme.colorScheme.avatarLabel
+                color = MyTheme.colorScheme.avatarLabel
             )
         }
     } else {
@@ -65,14 +65,14 @@ fun GrowAvatar(
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
-    com.bestswlkh0310.mydesignsystem.foundation.GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
                 .padding(10.dp)
         ) {
-            GrowAvatar(type = AvatarType.Large)
+            MyAvatar(type = AvatarType.Large)
         }
     }
 }

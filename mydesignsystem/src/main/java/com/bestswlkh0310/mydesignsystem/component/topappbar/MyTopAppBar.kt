@@ -19,15 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.bestswlkh0310.mydesignsystem.R
 import com.bestswlkh0310.mydesignsystem.extension.bounceClick
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
 @Composable
-fun GrowTopAppBar(
+fun MyTopAppBar(
     modifier: Modifier = Modifier,
     text: String,
-    backgroundColor: Color = GrowTheme.colorScheme.background,
+    backgroundColor: Color = MyTheme.colorScheme.background,
     onClickBackButton: (() -> Unit)? = null,
     trailingContent: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
@@ -48,24 +48,24 @@ fun GrowTopAppBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 onClickBackButton?.let {
-                    GrowIcon(
+                    MyIcon(
                         modifier = Modifier
                             .size(28.dp)
                             .padding(2.dp)
                             .bounceClick(onClick = it),
                         id = R.drawable.ic_expand_left,
-                        color = GrowTheme.colorScheme.textNormal
+                        color = MyTheme.colorScheme.textNormal
                     )
                 }
                 val textStyle =
-                    if (onClickBackButton == null) GrowTheme.typography.title2B
-                    else GrowTheme.typography.headline2M
+                    if (onClickBackButton == null) MyTheme.typography.title2B
+                    else MyTheme.typography.headline2M
                 Text(
                     modifier = Modifier
                         .padding(start = 8.dp),
                     text = text,
                     style = textStyle,
-                    color = GrowTheme.colorScheme.textNormal
+                    color = MyTheme.colorScheme.textNormal
                 )
             }
 
@@ -84,11 +84,11 @@ fun GrowTopAppBar(
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun TopBarPreview() {
-    GrowTopAppBar(
+    MyTopAppBar(
         text = "히히",
-        backgroundColor = GrowTheme.colorScheme.backgroundAlt,
+        backgroundColor = MyTheme.colorScheme.backgroundAlt,
         trailingContent = {
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "complete")
@@ -100,11 +100,11 @@ private fun TopBarPreview() {
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun TopBarWithBackButtonPreview() {
-    GrowTopAppBar(
+    MyTopAppBar(
         text = "히히",
-        backgroundColor = GrowTheme.colorScheme.backgroundAlt,
+        backgroundColor = MyTheme.colorScheme.backgroundAlt,
         onClickBackButton = {
 
         },

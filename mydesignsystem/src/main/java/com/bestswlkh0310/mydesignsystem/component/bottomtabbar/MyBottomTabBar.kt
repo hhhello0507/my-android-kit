@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bestswlkh0310.mydesignsystem.R
 import com.bestswlkh0310.mydesignsystem.extension.bounceClick
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
-import com.bestswlkh0310.mydesignsystem.foundation.iconography.GrowIcon
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
+import com.bestswlkh0310.mydesignsystem.foundation.iconography.MyIcon
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
 sealed class BottomTabItemType(
     @DrawableRes val resId: Int,
@@ -50,7 +50,7 @@ private val bottomTabList = arrayOf(
 )
 
 @Composable
-fun GrowBottomTabBar(
+fun MyBottomTabBar(
     modifier: Modifier = Modifier,
     selected: BottomTabItemType,
     onClick: (BottomTabItemType) -> Unit
@@ -63,13 +63,13 @@ fun GrowBottomTabBar(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = GrowTheme.colorScheme.background,
+                color = MyTheme.colorScheme.background,
                 shape = shape,
             )
             .border(
                 border = BorderStroke(
                     width = 1.dp,
-                    color = GrowTheme.colorScheme.bottomTabSecondary
+                    color = MyTheme.colorScheme.bottomTabSecondary
                 ),
                 shape = shape
             )
@@ -77,7 +77,7 @@ fun GrowBottomTabBar(
             .navigationBarsPadding()
     ) {
         bottomTabList.forEach {
-            GrowBottomTabItem(
+            MyBottomTabItem(
                 modifier = Modifier
                     .weight(1f),
                 type = it,
@@ -90,14 +90,14 @@ fun GrowBottomTabBar(
 }
 
 @Composable
-private fun GrowBottomTabItem(
+private fun MyBottomTabItem(
     modifier: Modifier = Modifier,
     type: BottomTabItemType,
     selected: Boolean,
     onClick: () -> Unit
 ) {
     val animColor by animateColorAsState(
-        targetValue = if (selected) GrowTheme.colorScheme.bottomTabPrimary else GrowTheme.colorScheme.bottomTabPrimaryDisabled,
+        targetValue = if (selected) MyTheme.colorScheme.bottomTabPrimary else MyTheme.colorScheme.bottomTabPrimaryDisabled,
         label = "",
     )
 
@@ -107,7 +107,7 @@ private fun GrowBottomTabItem(
             .bounceClick(onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        GrowIcon(
+        MyIcon(
             modifier = Modifier
                 .size(26.dp),
             id = type.resId,
@@ -115,24 +115,24 @@ private fun GrowBottomTabItem(
         )
         Text(
             text = type.text,
-            style = GrowTheme.typography.labelRegular.copy(fontSize = 10.sp),
+            style = MyTheme.typography.labelRegular.copy(fontSize = 10.sp),
             color = animColor,
         )
     }
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
     var selectedItem: BottomTabItemType by remember { mutableStateOf(BottomTabItemType.Home) }
-    GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(GrowTheme.colorScheme.background),
+                .background(MyTheme.colorScheme.background),
         ) {
             Spacer(modifier = Modifier.weight(1f))
-            GrowBottomTabBar(
+            MyBottomTabBar(
                 modifier = Modifier,
                 selected = selectedItem,
                 onClick = {

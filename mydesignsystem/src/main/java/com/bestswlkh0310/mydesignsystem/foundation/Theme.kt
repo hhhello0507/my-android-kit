@@ -9,13 +9,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.bestswlkh0310.mydesignsystem.foundation.color.LocalGrowColorScheme
+import com.bestswlkh0310.mydesignsystem.foundation.color.LocalMyColorScheme
 import com.bestswlkh0310.mydesignsystem.foundation.color.darkColorScheme
 import com.bestswlkh0310.mydesignsystem.foundation.color.lightColorScheme
-import com.bestswlkh0310.mydesignsystem.foundation.typography.LocalGrowTypography
+import com.bestswlkh0310.mydesignsystem.foundation.typography.LocalMyTypography
 
 @Composable
-fun GrowTheme(
+fun MyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
@@ -32,8 +32,8 @@ fun GrowTheme(
         }
     }
     CompositionLocalProvider(
-        LocalGrowColorScheme provides colorScheme,
-        LocalGrowTypography provides GrowTheme.typography,
+        LocalMyColorScheme provides colorScheme,
+        LocalMyTypography provides MyTheme.typography,
         content = content
     )
 }

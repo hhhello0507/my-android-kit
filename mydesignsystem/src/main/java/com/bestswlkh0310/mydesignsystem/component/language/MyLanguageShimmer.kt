@@ -11,13 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.bestswlkh0310.mydesignsystem.foundation.GrowTheme
+import com.bestswlkh0310.mydesignsystem.foundation.MyTheme
 import com.bestswlkh0310.mydesignsystem.foundation.shimmer.shimmerEffect
-import com.bestswlkh0310.mydesignsystem.foundation.util.GrowPreviews
-import com.molohala.grow.designsystem.component.language.GrowLanguage
+import com.bestswlkh0310.mydesignsystem.foundation.util.MyPreviews
 
 @Composable
-fun GrowLanguageShimmer(
+fun MyLanguageShimmer(
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -30,17 +29,17 @@ fun GrowLanguageShimmer(
 }
 
 @Composable
-@GrowPreviews
+@MyPreviews
 private fun Preview() {
-    GrowTheme {
+    MyTheme {
         Column(
             modifier = Modifier
-                .background(GrowTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.background)
                 .padding(10.dp)
         ) {
-            GrowLanguage(text = "Swift")
-            GrowLanguage(text = "Mojo")
-            GrowLanguageShimmer()
+            MyLanguage(text = "Swift")
+            MyLanguage(text = "Mojo")
+            MyLanguageShimmer()
         }
     }
 }
