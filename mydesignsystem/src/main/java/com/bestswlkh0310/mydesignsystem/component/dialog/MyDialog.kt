@@ -142,3 +142,73 @@ fun MyDialog(
         }
     }
 }
+
+
+@Composable
+fun MyDialog(
+    title: String,
+    content: String? = null,
+    cancelText: String = "닫기",
+    successText: String = "확인",
+    onSuccessRequest: () -> Unit,
+    onCancelRequest: () -> Unit,
+    onDismissRequest: () -> Unit,
+    subContent: @Composable () -> Unit
+) {
+    Dialog(
+        onDismissRequest = onDismissRequest,
+    ) {
+        Box(
+            modifier = Modifier
+                .myShadow(com.bestswlkh0310.mydesignsystem.foundation.shadow.ShadowType.ElevationBlack2)
+                .background(
+                    color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.background,
+                    shape = RoundedCornerShape(16.dp),
+                ),
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(18.dp),
+            ) {
+                Column(
+                    modifier = Modifier.padding(4.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = title,
+                        color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textNormal,
+                        style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.headline1B,
+                    )
+                    content?.let {
+                        Text(
+                            text = it,
+                            color = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.colorScheme.textAlt,
+                            style = com.bestswlkh0310.mydesignsystem.foundation.MyTheme.typography.bodyMedium,
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(18.dp))
+                subContent()
+                Spacer(modifier = Modifier.height(18.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    MyTextButton(
+                        modifier = Modifier
+                            .weight(1f),
+                        text = cancelText,
+                        type = ButtonType.Medium,
+                        onClick = onCancelRequest
+                    )
+                    MyCTAButton(
+                        modifier = Modifier
+                            .weight(1f),
+                        text = successText,
+                        onClick = onSuccessRequest
+                    )
+                }
+            }
+        }
+    }
+}
