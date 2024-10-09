@@ -7,7 +7,7 @@ plugins {
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "com.bestswlkh0310"
+            groupId = "com.hhhello0507"
             artifactId = "mydesignsystem"
             version = "1.0.0"
 
@@ -19,7 +19,7 @@ publishing {
 }
 
 android {
-    namespace = "com.bestswlkh0310.mydesignsystem"
+    namespace = "com.hhhello0507.mydesignsystem"
     compileSdk = 34
 
     defaultConfig {

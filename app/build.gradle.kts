@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.bestswlkh0310.app"
+    namespace = "com.hhhello0507.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.bestswlkh0310.app"
+        applicationId = "com.hhhello0507.app"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
