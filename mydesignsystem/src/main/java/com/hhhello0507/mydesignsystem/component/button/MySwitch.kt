@@ -1,6 +1,7 @@
 package com.hhhello0507.mydesignsystem.component.button
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,8 @@ import com.hhhello0507.mydesignsystem.internal.MyPreviews
 fun MySwitch(
     modifier: Modifier = Modifier,
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
+    onCheckedChange: (Boolean) -> Unit,
+    interactionSource: MutableInteractionSource? = null,
 ) {
     Switch(
         checked = checked,
@@ -49,6 +51,7 @@ fun MySwitch(
                     .shadow(Elevation.ElevationBlack1),
             )
         },
+        interactionSource = interactionSource
     )
 }
 
@@ -62,8 +65,8 @@ private fun Preview() {
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            MySwitch(checked = true) {}
-            MySwitch(checked = false) {}
+            MySwitch(checked = true, onCheckedChange = {})
+            MySwitch(checked = false, onCheckedChange = {})
         }
     }
 }
