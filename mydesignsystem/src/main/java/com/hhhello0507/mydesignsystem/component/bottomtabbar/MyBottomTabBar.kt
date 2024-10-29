@@ -25,10 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hhhello0507.mydesignsystem.R
-import com.hhhello0507.mydesignsystem.extension.bounceClick
+import com.hhhello0507.mydesignsystem.internal.bounceClick
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
-import com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 abstract class BottomTabItem(
     @DrawableRes val resId: Int,
@@ -50,13 +50,13 @@ fun MyBottomTabBar(
         modifier = modifier
             .fillMaxWidth()
             .background(
-                color = MyTheme.colorScheme.background,
+                color = MyTheme.colorScheme.backgroundNormal,
                 shape = shape,
             )
             .border(
                 border = BorderStroke(
                     width = 1.dp,
-                    color = MyTheme.colorScheme.bottomTabSecondary
+                    color = MyTheme.colorScheme.lineAlternative
                 ),
                 shape = shape
             )
@@ -84,7 +84,11 @@ private fun MyBottomTabItem(
     onClick: () -> Unit
 ) {
     val animColor by animateColorAsState(
-        targetValue = if (selected) MyTheme.colorScheme.bottomTabPrimary else MyTheme.colorScheme.bottomTabPrimaryDisabled,
+        targetValue = if (selected) {
+            MyTheme.colorScheme.primaryNormal
+        } else {
+            MyTheme.colorScheme.labelAssistive
+        },
         label = "",
     )
 
@@ -122,7 +126,7 @@ private fun Preview() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MyTheme.colorScheme.background),
+                .background(MyTheme.colorScheme.backgroundNormal),
         ) {
             Spacer(modifier = Modifier.weight(1f))
             MyBottomTabBar(

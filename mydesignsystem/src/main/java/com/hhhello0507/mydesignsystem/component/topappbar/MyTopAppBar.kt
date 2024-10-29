@@ -18,16 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.hhhello0507.mydesignsystem.R
-import com.hhhello0507.mydesignsystem.extension.bounceClick
+import com.hhhello0507.mydesignsystem.internal.bounceClick
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
-import com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 @Composable
 fun MyTopAppBar(
     modifier: Modifier = Modifier,
     text: String,
-    backgroundColor: Color = MyTheme.colorScheme.background,
+    backgroundColor: Color = MyTheme.colorScheme.backgroundNormal,
     onClickBackButton: (() -> Unit)? = null,
     trailingContent: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
@@ -54,18 +54,18 @@ fun MyTopAppBar(
                             .padding(2.dp)
                             .bounceClick(onClick = it),
                         id = R.drawable.ic_expand_left,
-                        color = MyTheme.colorScheme.textNormal
+                        color = MyTheme.colorScheme.labelNormal
                     )
                 }
                 val textStyle =
                     if (onClickBackButton == null) MyTheme.typography.title2B
-                    else MyTheme.typography.headline2M
+                    else MyTheme.typography.heading2M
                 Text(
                     modifier = Modifier
                         .padding(start = 8.dp),
                     text = text,
                     style = textStyle,
-                    color = MyTheme.colorScheme.textNormal
+                    color = MyTheme.colorScheme.labelNormal
                 )
             }
 
@@ -88,7 +88,7 @@ fun MyTopAppBar(
 private fun TopBarPreview() {
     MyTopAppBar(
         text = "히히",
-        backgroundColor = MyTheme.colorScheme.backgroundAlt,
+        backgroundColor = MyTheme.colorScheme.backgroundNormal,
         trailingContent = {
             Button(onClick = { /*TODO*/ }) {
                 Text(text = "complete")
@@ -104,7 +104,7 @@ private fun TopBarPreview() {
 private fun TopBarWithBackButtonPreview() {
     MyTopAppBar(
         text = "히히",
-        backgroundColor = MyTheme.colorScheme.backgroundAlt,
+        backgroundColor = MyTheme.colorScheme.backgroundNormal,
         onClickBackButton = {
 
         },

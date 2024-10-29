@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
-import com.hhhello0507.mydesignsystem.foundation.shadow.ShadowType
-import com.hhhello0507.mydesignsystem.foundation.shadow.myShadow
-import com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+import com.hhhello0507.mydesignsystem.foundation.elevation.Elevation
+import com.hhhello0507.mydesignsystem.foundation.elevation.shadow
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 
 @Composable
@@ -27,10 +27,10 @@ fun MyToggle(
     modifier: Modifier = Modifier,
     checked: Boolean,
     colors: SwitchColors = SwitchDefaults.colors(
-        checkedThumbColor = MyTheme.colorScheme.background,
-        checkedTrackColor = MyTheme.colorScheme.buttonPrimary,
-        uncheckedThumbColor = MyTheme.colorScheme.background,
-        uncheckedTrackColor = MyTheme.colorScheme.buttonTextDisabled,
+//        checkedThumbColor = MyTheme.colorScheme.background,
+//        checkedTrackColor = MyTheme.colorScheme.buttonPrimary,
+//        uncheckedThumbColor = MyTheme.colorScheme.background,
+//        uncheckedTrackColor = MyTheme.colorScheme.buttonTextDisabled,
         uncheckedBorderColor = Color.Transparent
     ),
     onCheckedChange: (Boolean) -> Unit
@@ -50,7 +50,7 @@ fun MyToggle(
                         color = Color.White,
                         shape = CircleShape,
                     )
-                    .myShadow(ShadowType.ElevationBlack1),
+                    .shadow(Elevation.ElevationBlack1),
             )
         },
     )
@@ -62,7 +62,7 @@ private fun Preview() {
     MyTheme {
         Column(
             modifier = Modifier
-                .background(MyTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.backgroundNormal)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {

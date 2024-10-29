@@ -10,120 +10,152 @@ import androidx.compose.ui.graphics.Color
 
 @Stable
 class MyColorScheme(
-    textNormal: Color,
-    textDarken: Color,
-    textAlt: Color,
-    textInverse: Color,
-    textDisabled: Color,
-    textWarning: Color,
-    buttonPrimary: Color,
-    buttonPrimaryPressed: Color,
-    buttonPrimaryDisabled: Color,
-    buttonText: Color,
-    buttonTextDisabled: Color,
-    tabButtonPrimary: Color,
-    radioButtonPrimary: Color,
-    radioButtonPrimaryDisabled: Color,
-    radioButtonSecondary: Color,
-    radioButtonSecondaryDisabled: Color,
-    background: Color,
-    backgroundAlt: Color,
-    backgroundInverse: Color,
-    github: Color,
-    baekjoon: Color,
-    dividerNormal: Color,
-    textFieldIcon: Color,
-    textFieldPrimary: Color,
-    textFieldSecondary: Color,
-    textFieldSecondaryDisabled: Color,
-    textFieldTextDisabled: Color,
-    avatarLabel: Color,
-    avatarBackground: Color,
+    /*
+    Label
+     */
+    labelNormal: Color,
+    labelStrong: Color,
+    labelNeutral: Color,
+    labelAlternative: Color,
+    labelAssistive: Color,
+    labelDisable: Color,
+
+    /*
+    Line
+     */
+    lineNormal: Color,
+    lineNeutral: Color,
+    lineAlternative: Color,
+
+    /*
+    Fill
+     */
+    fillNormal: Color,
+    fillNeutral: Color,
+    fillAlternative: Color,
+    fillAssistive: Color,
+
+    /*
+    Background
+     */
+    backgroundNormal: Color,
+    backgroundNeutral: Color,
+    backgroundAlternative: Color,
+
+    /*
+    Elevation
+     */
     elevationBlack1: Color,
     elevationBlack2: Color,
     elevationBlack3: Color,
-    bottomTabPrimary: Color,
-    bottomTabPrimaryDisabled: Color,
-    bottomTabSecondary: Color,
-    likePrimary: Color,
-    likeSecondary: Color,
-    chartAxis: Color
+
+    /*
+    Static
+     */
+    white: Color,
+    black: Color,
+    clear: Color,
+
+    /*
+    Primary
+     */
+    primaryNormal: Color,
+    primaryAlternative: Color,
+    primaryAssistive: Color,
+
+    /*
+    Status
+     */
+    negative: Color,
+    cautionary: Color,
+    positive: Color
 ) {
-    var textNormal by mutableStateOf(textNormal, structuralEqualityPolicy())
+    /*
+    Label
+     */
+    var labelNormal by mutableStateOf(labelNormal, structuralEqualityPolicy())
         internal set
-    var textDarken by mutableStateOf(textDarken, structuralEqualityPolicy())
+    var labelStrong by mutableStateOf(labelStrong, structuralEqualityPolicy())
         internal set
-    var textAlt by mutableStateOf(textAlt, structuralEqualityPolicy())
+    var labelNeutral by mutableStateOf(labelAlternative, structuralEqualityPolicy())
         internal set
-    var textInverse by mutableStateOf(textInverse, structuralEqualityPolicy())
+    var labelAlternative by mutableStateOf(labelAlternative, structuralEqualityPolicy())
         internal set
-    var textDisabled by mutableStateOf(textDisabled, structuralEqualityPolicy())
+    var labelAssistive by mutableStateOf(labelAssistive, structuralEqualityPolicy())
         internal set
-    var textWarning by mutableStateOf(textWarning, structuralEqualityPolicy())
+    var labelDisable by mutableStateOf(labelDisable, structuralEqualityPolicy())
         internal set
-    var buttonPrimary by mutableStateOf(buttonPrimary, structuralEqualityPolicy())
+
+    /*
+    Line
+     */
+    var lineNormal by mutableStateOf(lineNormal, structuralEqualityPolicy())
         internal set
-    var buttonPrimaryPressed by mutableStateOf(buttonPrimaryPressed, structuralEqualityPolicy())
+    var lineNeutral by mutableStateOf(lineNeutral, structuralEqualityPolicy())
         internal set
-    var buttonPrimaryDisabled by mutableStateOf(buttonPrimaryDisabled, structuralEqualityPolicy())
+    var lineAlternative by mutableStateOf(lineAlternative, structuralEqualityPolicy())
         internal set
-    var buttonText by mutableStateOf(buttonText, structuralEqualityPolicy())
+
+    /*
+    Fill
+     */
+    var fillNormal by mutableStateOf(fillNormal, structuralEqualityPolicy())
         internal set
-    var buttonTextDisabled by mutableStateOf(buttonTextDisabled, structuralEqualityPolicy())
+    var fillNeutral by mutableStateOf(fillNeutral, structuralEqualityPolicy())
         internal set
-    var tabButtonPrimary by mutableStateOf(tabButtonPrimary, structuralEqualityPolicy())
+    var fillAlternative by mutableStateOf(fillAlternative, structuralEqualityPolicy())
         internal set
-    var radioButtonPrimary by mutableStateOf(radioButtonPrimary, structuralEqualityPolicy())
+    var fillAssistive by mutableStateOf(fillAssistive, structuralEqualityPolicy())
         internal set
-    var radioButtonPrimaryDisabled by mutableStateOf(radioButtonPrimaryDisabled, structuralEqualityPolicy())
+
+    /*
+    Background
+     */
+    var backgroundNormal by mutableStateOf(backgroundNormal, structuralEqualityPolicy())
         internal set
-    var radioButtonSecondary by mutableStateOf(radioButtonSecondary, structuralEqualityPolicy())
+    var backgroundNeutral by mutableStateOf(backgroundNeutral, structuralEqualityPolicy())
         internal set
-    var radioButtonSecondaryDisabled by mutableStateOf(radioButtonSecondaryDisabled, structuralEqualityPolicy())
+    var backgroundAlternative by mutableStateOf(backgroundAlternative, structuralEqualityPolicy())
         internal set
-    var background by mutableStateOf(background, structuralEqualityPolicy())
-        internal set
-    var backgroundAlt by mutableStateOf(backgroundAlt, structuralEqualityPolicy())
-        internal set
-    var backgroundInverse by mutableStateOf(backgroundInverse, structuralEqualityPolicy())
-        internal set
-    var github by mutableStateOf(github, structuralEqualityPolicy())
-        internal set
-    var baekjoon by mutableStateOf(baekjoon, structuralEqualityPolicy())
-        internal set
-    var dividerNormal by mutableStateOf(dividerNormal, structuralEqualityPolicy())
-        internal set
-    var textFieldIcon by mutableStateOf(textFieldIcon, structuralEqualityPolicy())
-        internal set
-    var textFieldPrimary by mutableStateOf(textFieldPrimary, structuralEqualityPolicy())
-        internal set
-    var textFieldSecondary by mutableStateOf(textFieldSecondary, structuralEqualityPolicy())
-        internal set
-    var textFieldSecondaryDisabled by mutableStateOf(textFieldSecondaryDisabled, structuralEqualityPolicy())
-        internal set
-    var textFieldTextDisabled by mutableStateOf(textFieldTextDisabled, structuralEqualityPolicy())
-        internal set
-    var avatarLabel by mutableStateOf(avatarLabel, structuralEqualityPolicy())
-        internal set
-    var avatarBackground by mutableStateOf(avatarBackground, structuralEqualityPolicy())
-        internal set
+
+    /*
+    Elevation
+     */
     var elevationBlack1 by mutableStateOf(elevationBlack1, structuralEqualityPolicy())
         internal set
     var elevationBlack2 by mutableStateOf(elevationBlack2, structuralEqualityPolicy())
         internal set
     var elevationBlack3 by mutableStateOf(elevationBlack3, structuralEqualityPolicy())
         internal set
-    var bottomTabPrimary by mutableStateOf(bottomTabPrimary, structuralEqualityPolicy())
+
+    /*
+    Static
+     */
+    var white by mutableStateOf(white, structuralEqualityPolicy())
         internal set
-    var bottomTabPrimaryDisabled by mutableStateOf(bottomTabPrimaryDisabled, structuralEqualityPolicy())
+    var black by mutableStateOf(black, structuralEqualityPolicy())
         internal set
-    var bottomTabSecondary by mutableStateOf(bottomTabSecondary, structuralEqualityPolicy())
+    var clear by mutableStateOf(clear, structuralEqualityPolicy())
         internal set
-    var likePrimary by mutableStateOf(likePrimary, structuralEqualityPolicy())
+
+    /*
+    Primary
+     */
+    var primaryNormal by mutableStateOf(primaryNormal, structuralEqualityPolicy())
         internal set
-    var likeSecondary by mutableStateOf(likeSecondary, structuralEqualityPolicy())
+    var primaryAlternative by mutableStateOf(primaryAlternative, structuralEqualityPolicy())
         internal set
-    var chartAxis by mutableStateOf(chartAxis, structuralEqualityPolicy())
+    var primaryAssistive by mutableStateOf(primaryAssistive, structuralEqualityPolicy())
+        internal set
+
+    /*
+    Status
+     */
+    var negative by mutableStateOf(negative, structuralEqualityPolicy())
+        internal set
+    var cautionary by mutableStateOf(cautionary, structuralEqualityPolicy())
+        internal set
+    var positive by mutableStateOf(positive, structuralEqualityPolicy())
         internal set
 }
 

@@ -1,85 +1,126 @@
 package com.hhhello0507.mydesignsystem.foundation.color
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.hhhello0507.mydesignsystem.foundation.MyTheme
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 fun lightColorScheme() = MyColorScheme(
-    textNormal = MyPallete.Neutral90,
-    textDarken = MyPallete.Neutral80,
-    textAlt = MyPallete.Neutral50,
-    textInverse = MyPallete.Neutral10,
-    textDisabled = MyPallete.Neutral40,
-    textWarning = MyPallete.Red70,
-    buttonPrimary = MyPallete.Primary60,
-    buttonPrimaryPressed = MyPallete.Primary80,
-    buttonPrimaryDisabled = MyPallete.Neutral20,
-    buttonText = MyPallete.Neutral90,
-    buttonTextDisabled = MyPallete.Neutral40,
-    tabButtonPrimary = MyPallete.Neutral90,
-    radioButtonPrimary = MyPallete.Neutral90,
-    radioButtonPrimaryDisabled = MyPallete.Neutral40,
-    radioButtonSecondary = MyPallete.Neutral70,
-    radioButtonSecondaryDisabled = MyPallete.Neutral50,
-    background = MyPallete.Neutral00,
-    backgroundAlt = MyPallete.Neutral10,
-    backgroundInverse = MyPallete.Neutral80,
-    github = Color(0xFF24292E),
-    baekjoon = Color(0xFF0076C0),
-    dividerNormal = MyPallete.Neutral20,
-    textFieldIcon = MyPallete.Neutral90,
-    textFieldPrimary = MyPallete.Primary80,
-    textFieldSecondary = MyPallete.Neutral30,
-    textFieldSecondaryDisabled = MyPallete.Neutral20,
-    textFieldTextDisabled = MyPallete.Neutral40,
-    avatarLabel = MyPallete.Neutral30,
-    avatarBackground = MyPallete.Neutral20,
-    elevationBlack1 = MyPallete.Neutral100,
-    elevationBlack2 = MyPallete.Neutral100,
-    elevationBlack3 = MyPallete.Neutral100,
-    bottomTabPrimary = MyPallete.Neutral70,
-    bottomTabPrimaryDisabled = MyPallete.Neutral40,
-    bottomTabSecondary = MyPallete.Neutral30,
-    likePrimary = MyPallete.Red60,
-    likeSecondary = MyPallete.Red10,
-    chartAxis = MyPallete.Neutral30
+    labelNormal = Palette.Neutral5,
+    labelStrong = Palette.Common100,
+    labelNeutral = Palette.Neutral25,
+    labelAlternative = Palette.Neutral40,
+    labelAssistive = Palette.Neutral50,
+    labelDisable = Palette.Neutral97,
+    lineNormal = Palette.Neutral90,
+    lineNeutral = Palette.Neutral95,
+    lineAlternative = Palette.Neutral97,
+    fillNormal = Palette.Neutral97,
+    fillNeutral = Palette.Neutral95,
+    fillAlternative = Palette.Neutral90,
+    fillAssistive = Palette.Common00,
+    backgroundNormal = Palette.Common00,
+    backgroundNeutral = Palette.Neutral99,
+    backgroundAlternative = Palette.Neutral97,
+    elevationBlack1 = Palette.Common100.copy(alpha = 0.02f),
+    elevationBlack2 = Palette.Common100.copy(alpha = 0.04f),
+    elevationBlack3 = Palette.Common100.copy(alpha = 0.06f),
+    white = Palette.Common00,
+    black = Palette.Common100,
+    clear = Palette.Transparent,
+    primaryNormal = Palette.Blue50,
+    primaryAlternative = Palette.Blue50.copy(alpha = 0.65f),
+    primaryAssistive = Palette.Blue50.copy(alpha = 0.2f),
+    negative = Palette.Red50,
+    cautionary = Palette.Yellow50,
+    positive = Palette.Green50,
 )
 
 fun darkColorScheme() = MyColorScheme(
-    textNormal = MyPallete.Neutral10,
-    textDarken = MyPallete.Neutral50,
-    textAlt = MyPallete.Neutral60,
-    textInverse = MyPallete.Neutral10,
-    textDisabled = MyPallete.Neutral40,
-    textWarning = MyPallete.Red60,
-    buttonPrimary = MyPallete.Primary60,
-    buttonPrimaryPressed = MyPallete.Primary80,
-    buttonPrimaryDisabled = MyPallete.Neutral70,
-    buttonText = MyPallete.Neutral90,
-    buttonTextDisabled = MyPallete.Neutral60,
-    tabButtonPrimary = MyPallete.Primary60,
-    radioButtonPrimary = MyPallete.Primary60,
-    radioButtonPrimaryDisabled = MyPallete.Neutral60,
-    radioButtonSecondary = MyPallete.Neutral20,
-    radioButtonSecondaryDisabled = MyPallete.Neutral50,
-    background = MyPallete.Neutral80,
-    backgroundAlt = MyPallete.Neutral90,
-    backgroundInverse = MyPallete.Neutral00,
-    github = MyPallete.Neutral10,
-    baekjoon = MyPallete.Neutral10,
-    dividerNormal = MyPallete.Neutral70,
-    textFieldIcon = MyPallete.Neutral60,
-    textFieldPrimary = MyPallete.Primary80,
-    textFieldSecondary = MyPallete.Neutral70,
-    textFieldSecondaryDisabled = MyPallete.Neutral70,
-    textFieldTextDisabled = MyPallete.Neutral70,
-    avatarLabel = MyPallete.Neutral80,
-    avatarBackground = MyPallete.Neutral70,
-    elevationBlack1 = Color(0xFFCCCCD6),
-    elevationBlack2 = Color(0xFFCCCCD6),
-    elevationBlack3 = Color(0xFFCCCCD6),
-    bottomTabPrimary = MyPallete.Primary40,
-    bottomTabPrimaryDisabled = MyPallete.Neutral60,
-    bottomTabSecondary = MyPallete.Neutral70,
-    likePrimary = MyPallete.Red60,
-    likeSecondary = MyPallete.Transparent,
-    chartAxis = MyPallete.Neutral70
+    labelNormal = Palette.Neutral99,
+    labelStrong = Palette.Common00,
+    labelNeutral = Palette.Neutral95,
+    labelAlternative = Palette.Neutral90,
+    labelAssistive = Palette.Neutral70,
+    labelDisable = Palette.Neutral30,
+    lineNormal = Palette.Neutral50,
+    lineNeutral = Palette.Neutral30,
+    lineAlternative = Palette.Neutral25,
+    fillNormal = Palette.Neutral20,
+    fillNeutral = Palette.Neutral25,
+    fillAlternative = Palette.Neutral30,
+    fillAssistive = Palette.Neutral60,
+    backgroundNormal = Palette.Neutral15,
+    backgroundNeutral = Palette.Neutral10,
+    backgroundAlternative = Palette.Neutral7,
+    elevationBlack1 = Color(0xFFCCCCD6).copy(alpha = 0.02f),
+    elevationBlack2 = Color(0xFFCCCCD6).copy(alpha = 0.04f),
+    elevationBlack3 = Color(0xFFCCCCD6).copy(alpha = 0.06f),
+    white = Palette.Common00,
+    black = Palette.Common100,
+    clear = Palette.Transparent,
+    primaryNormal = Palette.Blue50,
+    primaryAlternative = Palette.Blue50.copy(alpha = 0.65f),
+    primaryAssistive = Palette.Blue50.copy(alpha = 0.2f),
+    negative = Palette.Red50,
+    cautionary = Palette.Yellow50,
+    positive = Palette.Green50
 )
+
+@MyPreviews
+@Composable
+private fun Preview() {
+    MyTheme {
+        val colorScheme = MyTheme.colorScheme
+        LazyColumn {
+            items(
+                listOf(
+                    colorScheme.labelNormal,
+                    colorScheme.labelNormal,
+                    colorScheme.labelStrong,
+                    colorScheme.labelNeutral,
+                    colorScheme.labelAlternative,
+                    colorScheme.labelAssistive,
+                    colorScheme.labelDisable,
+                    colorScheme.lineNormal,
+                    colorScheme.lineNeutral,
+                    colorScheme.lineAlternative,
+                    colorScheme.fillNormal,
+                    colorScheme.fillNeutral,
+                    colorScheme.fillAlternative,
+                    colorScheme.fillAssistive,
+                    colorScheme.backgroundNormal,
+                    colorScheme.backgroundNeutral,
+                    colorScheme.backgroundAlternative,
+                    colorScheme.elevationBlack1,
+                    colorScheme.elevationBlack2,
+                    colorScheme.elevationBlack3,
+                    colorScheme.white,
+                    colorScheme.black,
+                    colorScheme.clear,
+                    colorScheme.primaryNormal,
+                    colorScheme.primaryAlternative,
+                    colorScheme.primaryAssistive,
+                    colorScheme.negative,
+                    colorScheme.cautionary,
+                    colorScheme.positive,
+                )
+            ) { color ->
+                Box(
+                    modifier = Modifier
+                        .background(color)
+                        .fillMaxWidth()
+                        .height(30.dp)
+                )
+            }
+        }
+    }
+}

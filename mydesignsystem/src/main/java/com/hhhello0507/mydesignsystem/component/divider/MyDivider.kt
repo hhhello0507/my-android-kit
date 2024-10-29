@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hhhello0507.mydesignsystem.foundation.MyTheme
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 sealed class DividerType(val size: Dp) {
     data object Thin: DividerType(size = 1.dp)
@@ -22,7 +24,7 @@ sealed class DividerType(val size: Dp) {
 fun MyDivider(
     modifier: Modifier = Modifier,
     thickness: DividerType = DividerType.Thin,
-    color: Color = com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.dividerNormal
+    color: Color = MyTheme.colorScheme.lineNormal
 ) {
     Box(
         modifier = modifier
@@ -33,12 +35,12 @@ fun MyDivider(
 }
 
 @Composable
-@com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+@MyPreviews
 private fun Preview() {
-    com.hhhello0507.mydesignsystem.foundation.MyTheme {
+    MyTheme {
         Column(
             modifier = Modifier
-                .background(com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.backgroundNormal)
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(32.dp)
         ) {

@@ -13,10 +13,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
-import com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 import com.hhhello0507.mydesignsystem.R
 
 sealed class AvatarType(
@@ -41,7 +40,7 @@ fun MyAvatar(
             modifier = modifier
                 .size(type.size)
                 .background(
-                    color = MyTheme.colorScheme.avatarBackground,
+                    color = MyTheme.colorScheme.fillAlternative,
                     shape = CircleShape,
                 ),
             contentAlignment = Alignment.Center,
@@ -49,18 +48,18 @@ fun MyAvatar(
             MyIcon(
                 modifier = Modifier.size(type.size / 2),
                 id = R.drawable.ic_person,
-                color = MyTheme.colorScheme.avatarLabel
+                color = MyTheme.colorScheme.fillAssistive
             )
         }
     } else {
-        AsyncImage(
-            modifier = modifier
-                .size(type.size)
-                .clip(CircleShape),
-            model = image,
-            contentDescription = "",
-            contentScale = ContentScale.Crop,
-        )
+//        AsyncImage(
+//            modifier = modifier
+//                .size(type.size)
+//                .clip(CircleShape),
+//            model = image,
+//            contentDescription = "",
+//            contentScale = ContentScale.Crop,
+//        )
     }
 }
 

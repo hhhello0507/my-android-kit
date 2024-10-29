@@ -1,4 +1,4 @@
-package com.hhhello0507.mydesignsystem.extension
+package com.hhhello0507.mydesignsystem.internal
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
@@ -14,9 +14,9 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 
-enum class ButtonState { Idle, Hold }
+internal enum class ButtonState { Idle, Hold }
 
-fun Modifier.bounceClick(
+internal fun Modifier.bounceClick(
     onChangeButtonState: (ButtonState) -> Unit = {},
     enabled: Boolean = true,
     onClick: () -> Unit

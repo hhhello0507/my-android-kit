@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.hhhello0507.mydesignsystem.extension.ButtonState
+import com.hhhello0507.mydesignsystem.internal.ButtonState
 
 @Composable
 fun MyTextButton(
@@ -48,9 +48,9 @@ fun MyTextButton(
 
     val colors = ButtonDefaults.buttonColors(
         containerColor = Color.Transparent,
-        contentColor = com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.buttonPrimary,
+        contentColor = com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.primaryNormal,
         disabledContainerColor = Color.Transparent,
-        disabledContentColor = com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.buttonTextDisabled,
+        disabledContentColor = com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.primaryNormal,
     )
 
     Button(
@@ -91,9 +91,9 @@ fun MyTextButton(
             verticalAlignment = Alignment.CenterVertically
         ) {
             val textColor = if (enabled) {
-                com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.buttonPrimary
+                com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.primaryNormal
             } else {
-                com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.buttonTextDisabled
+                com.hhhello0507.mydesignsystem.foundation.MyTheme.colorScheme.primaryNormal
             }
             leftIcon?.let {
                 com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon(

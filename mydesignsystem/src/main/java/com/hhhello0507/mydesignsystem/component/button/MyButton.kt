@@ -29,10 +29,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.hhhello0507.mydesignsystem.extension.ButtonState
+import com.hhhello0507.mydesignsystem.internal.ButtonState
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
-import com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 sealed class ButtonType(
     val contentPadding: PaddingValues,
@@ -72,9 +72,11 @@ fun MyButton(
     val isEnabled = enabled && !isLoading
 
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
-    val color =
-        if (enabled) MyTheme.colorScheme.buttonPrimary
-        else MyTheme.colorScheme.buttonPrimaryDisabled
+    val color = if (enabled) {
+        MyTheme.colorScheme.primaryNormal
+    } else {
+        MyTheme.colorScheme.primaryNormal
+    }
     val scale by animateFloatAsState(
         targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
         label = "",
@@ -90,9 +92,9 @@ fun MyButton(
 
     val colors = ButtonDefaults.buttonColors(
         containerColor = animColor,
-        contentColor = MyTheme.colorScheme.textNormal,
+        contentColor = MyTheme.colorScheme.labelNormal,
         disabledContainerColor = animColor,
-        disabledContentColor = MyTheme.colorScheme.buttonTextDisabled,
+        disabledContentColor = MyTheme.colorScheme.labelDisable,
     )
 
     Button(
@@ -116,8 +118,8 @@ fun MyButton(
             },
         colors = colors,
         enabled = isEnabled,
-        shape = shape?: type.shape,
-        contentPadding = contentPadding?: type.contentPadding,
+        shape = shape ?: type.shape,
+        contentPadding = contentPadding ?: type.contentPadding,
         interactionSource = interactionSource,
     ) {
 //            if (isLoading) {
@@ -132,11 +134,7 @@ fun MyButton(
             horizontalArrangement = Arrangement.spacedBy(6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            val textColor = if (enabled) {
-                MyTheme.colorScheme.buttonText
-            } else {
-                MyTheme.colorScheme.buttonTextDisabled
-            }
+            val textColor = MyTheme.colorScheme.labelNormal
             leftIcon?.let {
                 MyIcon(
                     modifier = Modifier
@@ -147,7 +145,7 @@ fun MyButton(
             }
             Text(
                 text = text,
-                style = textStyle?: MyTheme.typography.bodyBold,
+                style = textStyle ?: MyTheme.typography.bodyBold,
                 color = textColor
             )
             rightIcon?.let {
@@ -169,7 +167,7 @@ private fun Preview() {
     MyTheme {
         Column(
             modifier = Modifier
-                .background(MyTheme.colorScheme.background)
+                .background(MyTheme.colorScheme.backgroundNormal)
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {

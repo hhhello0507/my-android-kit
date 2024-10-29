@@ -1,4 +1,4 @@
-package com.hhhello0507.mydesignsystem.foundation.shadow
+package com.hhhello0507.mydesignsystem.foundation.elevation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,41 +11,39 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.hhhello0507.mydesignsystem.extension.shadow
+import com.hhhello0507.mydesignsystem.internal.shadow
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
-import com.hhhello0507.mydesignsystem.foundation.util.MyPreviews
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
-sealed class ShadowType(
+sealed class Elevation(
     val y: Int,
     val blur: Int,
-    val alpha: Float
+    val alpha: Float,
+    val defaultColor: @Composable () -> Color
 ) {
-    data object ElevationBlack1 : ShadowType(y = 3, blur = 10, alpha = 0.02f)
-    data object ElevationBlack2 : ShadowType(y = 4, blur = 12, alpha = 0.04f)
-    data object ElevationBlack3 : ShadowType(y = 6, blur = 18, alpha = 0.06f)
+    data object ElevationBlack1 : Elevation(y = 3, blur = 10, alpha = 0.02f, defaultColor = { MyTheme.colorScheme.elevationBlack1 })
+    data object ElevationBlack2 : Elevation(y = 4, blur = 12, alpha = 0.04f, defaultColor = { MyTheme.colorScheme.elevationBlack2 })
+    data object ElevationBlack3 : Elevation(y = 6, blur = 18, alpha = 0.06f, defaultColor = { MyTheme.colorScheme.elevationBlack3 })
 }
 
 @Composable
-fun Modifier.myShadow(type: ShadowType): Modifier {
-
-    val color = when (type) {
-        ShadowType.ElevationBlack1 -> MyTheme.colorScheme.elevationBlack1
-        ShadowType.ElevationBlack2 -> MyTheme.colorScheme.elevationBlack2
-        ShadowType.ElevationBlack3 -> MyTheme.colorScheme.elevationBlack2
-    }
-
-    return this.shadow(
-        offsetY = type.y.dp, color = color, blur = type.blur.dp, alpha = type.alpha
+fun Modifier.shadow(type: Elevation): Modifier =
+    this.shadow(
+        offsetY = type.y.dp,
+        color = type.defaultColor(),
+        blur = type.blur.dp,
+        alpha = type.alpha
     )
-}
+
 
 @Composable
 @MyPreviews
 private fun Preview() {
     MyTheme {
         Surface(
-            color = MyTheme.colorScheme.background
+            color = MyTheme.colorScheme.backgroundNormal
         ) {
             Row(
                 modifier = Modifier.padding(30.dp),
@@ -54,23 +52,23 @@ private fun Preview() {
                 Box(
                     modifier = Modifier
                         .size(40.dp)
-                        .myShadow(type = ShadowType.ElevationBlack1)
+                        .shadow(type = Elevation.ElevationBlack1)
                         .clip(RoundedCornerShape(12.dp))
-                        .background(MyTheme.colorScheme.background)
+                        .background(MyTheme.colorScheme.backgroundNormal)
                 )
                 Box(
                     modifier = Modifier
                         .size(40.dp)
-                        .myShadow(type = ShadowType.ElevationBlack2)
+                        .shadow(type = Elevation.ElevationBlack2)
                         .clip(RoundedCornerShape(12.dp))
-                        .background(MyTheme.colorScheme.background)
+                        .background(MyTheme.colorScheme.backgroundNormal)
                 )
                 Box(
                     modifier = Modifier
                         .size(40.dp)
-                        .myShadow(type = ShadowType.ElevationBlack3)
+                        .shadow(type = Elevation.ElevationBlack3)
                         .clip(RoundedCornerShape(12.dp))
-                        .background(MyTheme.colorScheme.background)
+                        .background(MyTheme.colorScheme.backgroundNormal)
                 )
             }
         }
