@@ -48,14 +48,14 @@ fun MyTopAppBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 onClickBackButton?.let {
-                    MyIcon(
-                        modifier = Modifier
-                            .size(28.dp)
-                            .padding(2.dp)
-                            .bounceClick(onClick = it),
-                        id = R.drawable.ic_expand_left,
-                        color = MyTheme.colorScheme.labelNormal
-                    )
+//                    MyIcon(
+//                        modifier = Modifier
+//                            .size(28.dp)
+//                            .padding(2.dp)
+//                            .bounceClick(onClick = it),
+//                        id = R.drawable.ic_expand_left,
+//                        color = MyTheme.colorScheme.labelNormal
+//                    )
                 }
                 val textStyle =
                     if (onClickBackButton == null) MyTheme.typography.title2B

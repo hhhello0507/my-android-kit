@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,6 +41,16 @@ fun Modifier.shadow(type: Elevation): Modifier =
 @Composable
 @MyPreviews
 private fun Preview() {
+    @Composable
+    fun makeElevationBox(type: Elevation) {
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .shadow(type = type)
+                .clip(RoundedCornerShape(12.dp))
+                .background(MyTheme.colorScheme.backgroundNormal)
+        )
+    }
     MyTheme {
         Surface(
             color = MyTheme.colorScheme.backgroundNormal
@@ -49,27 +59,9 @@ private fun Preview() {
                 modifier = Modifier.padding(30.dp),
                 horizontalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .shadow(type = Elevation.ElevationBlack1)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(MyTheme.colorScheme.backgroundNormal)
-                )
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .shadow(type = Elevation.ElevationBlack2)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(MyTheme.colorScheme.backgroundNormal)
-                )
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .shadow(type = Elevation.ElevationBlack3)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(MyTheme.colorScheme.backgroundNormal)
-                )
+                makeElevationBox(Elevation.ElevationBlack1)
+                makeElevationBox(Elevation.ElevationBlack2)
+                makeElevationBox(Elevation.ElevationBlack3)
             }
         }
     }

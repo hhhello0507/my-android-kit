@@ -1,8 +1,15 @@
 package com.hhhello0507.mydesignsystem.foundation.typography
 
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
+import com.hhhello0507.mydesignsystem.foundation.MyTheme
+import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 @Immutable
 class MyTypography(
@@ -39,3 +46,57 @@ class MyTypography(
 )
 
 internal val LocalMyTypography = staticCompositionLocalOf { MyTypography() }
+
+@Composable
+@MyPreviews
+private fun Preview() {
+    MyTheme {
+        Surface(
+            color = MyTheme.colorScheme.backgroundNormal
+        ) {
+            LazyColumn {
+                val typography = MyTypography()
+                items(
+                    listOf(
+                        typography.display1B,
+                        typography.display1M,
+                        typography.display1R,
+                        typography.display2B,
+                        typography.display2M,
+                        typography.display2R,
+                        typography.title1B,
+                        typography.title1M,
+                        typography.title1R,
+                        typography.title2B,
+                        typography.title2M,
+                        typography.title2R,
+                        typography.heading1B,
+                        typography.heading1M,
+                        typography.heading1R,
+                        typography.heading2B,
+                        typography.heading2M,
+                        typography.heading2R,
+                        typography.headlineB,
+                        typography.headlineM,
+                        typography.headlineR,
+                        typography.bodyBold,
+                        typography.bodyMedium,
+                        typography.bodyRegular,
+                        typography.labelBold,
+                        typography.labelMedium,
+                        typography.labelRegular,
+                        typography.captionBold,
+                        typography.captionMedium,
+                        typography.captionRegular,
+                    )
+                ) { textStyle ->
+                    Text(
+                        text = "테스트",
+                        color = MyTheme.colorScheme.labelNormal,
+                        style = textStyle
+                    )
+                }
+            }
+        }
+    }
+}

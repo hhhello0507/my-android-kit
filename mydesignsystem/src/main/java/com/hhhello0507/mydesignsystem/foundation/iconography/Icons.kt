@@ -10,6 +10,19 @@ import androidx.compose.ui.res.painterResource
 @Composable
 fun MyIcon(
     modifier: Modifier = Modifier,
+    type: IconType,
+    color: Color
+) {
+    MyIcon(
+        modifier = modifier,
+        id = type.icon,
+        color = color
+    )
+}
+
+@Composable
+fun MyIcon(
+    modifier: Modifier = Modifier,
     @DrawableRes id: Int,
     color: Color
 ) {
