@@ -32,12 +32,13 @@ data class BottomTabItem(
 
 @Composable
 fun MyBottomAppBar(
+    modifier: Modifier = Modifier,
     selected: Int,
     onClick: (Int) -> Unit,
     tabs: List<BottomTabItem>
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         tabs.forEachIndexed { index, tab ->
             if (index == selected) {
