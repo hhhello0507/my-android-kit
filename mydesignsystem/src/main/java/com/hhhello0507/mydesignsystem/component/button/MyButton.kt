@@ -1,22 +1,30 @@
 package com.hhhello0507.mydesignsystem.component.button
 
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,88 +32,62 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.hhhello0507.mydesignsystem.internal.ButtonState
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
+import com.hhhello0507.mydesignsystem.foundation.iconography.IconType
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
+import com.hhhello0507.mydesignsystem.internal.ButtonState
 import com.hhhello0507.mydesignsystem.internal.MyPreviews
-
-sealed class ButtonType(
-    val contentPadding: PaddingValues,
-    val shape: Shape
-) {
-    data object Large : ButtonType(
-        contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
-        shape = RoundedCornerShape(10.dp)
-    )
-
-    data object Medium : ButtonType(
-        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 10.dp),
-        shape = RoundedCornerShape(8.dp)
-    )
-
-    data object Small : ButtonType(
-        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
-        shape = RoundedCornerShape(6.dp)
-    )
-}
 
 @Composable
 fun MyButton(
     modifier: Modifier = Modifier,
     text: String,
-    type: ButtonType,
-    enabled: Boolean = true,
-    isLoading: Boolean = false,
-    @DrawableRes leftIcon: Int? = null,
-    @DrawableRes rightIcon: Int? = null,
+    size: ButtonSize,
+    role: ButtonRole = ButtonRole.PRIMARY,
     textStyle: TextStyle? = null,
     shape: Shape? = null,
     contentPadding: PaddingValues? = null,
+    startIcon: IconType? = null,
+    endIcon: IconType? = null,
+    isEnabled: Boolean = true,
+    isLoading: Boolean = false,
+    isRounded: Boolean = false,
+    expanded: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit,
 ) {
-    val isEnabled = enabled && !isLoading
+    val mergedEnabled = isEnabled && !isLoading
 
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
-    val color = if (enabled) {
-        MyTheme.colorScheme.primaryNormal
-    } else {
-        MyTheme.colorScheme.primaryNormal
-    }
+
     val scale by animateFloatAsState(
         targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
         label = "",
     )
-    val animColor by animateColorAsState(
-        targetValue = if (buttonState == ButtonState.Idle) {
-            color
-        } else {
-            color
-        },
-        label = "",
-    )
-
-    val colors = ButtonDefaults.buttonColors(
-        containerColor = animColor,
-        contentColor = MyTheme.colorScheme.labelNormal,
-        disabledContainerColor = animColor,
-        disabledContentColor = MyTheme.colorScheme.labelDisable,
-    )
+    val colors = MyButtonColors.colors(role)
 
     Button(
-        onClick = onClick,
+        onClick = {
+            if (mergedEnabled) {
+                onClick()
+            }
+        },
         modifier = modifier
+            .then(if (expanded) Modifier.fillMaxWidth() else Modifier)
+            .alpha(if (mergedEnabled) 1f else 0.5f)
+            .height(size.height)
             .graphicsLayer {
                 scaleX = scale
                 scaleY = scale
             }
             .pointerInput(buttonState) {
-                if (!isEnabled) return@pointerInput
+                if (!mergedEnabled) return@pointerInput
                 awaitPointerEventScope {
                     buttonState = if (buttonState == ButtonState.Hold) {
                         waitForUpOrCancellation()
@@ -116,48 +98,55 @@ fun MyButton(
                     }
                 }
             },
-        colors = colors,
-        enabled = isEnabled,
-        shape = shape ?: type.shape,
-        contentPadding = contentPadding ?: type.contentPadding,
+        colors = ButtonColors(
+            containerColor = colors.containerColor,
+            contentColor = colors.contentColor,
+            disabledContainerColor = colors.containerColor,
+            disabledContentColor = colors.contentColor
+        ),
+        enabled = mergedEnabled,
+        shape = shape ?: if (isRounded) RoundedCornerShape(size.height / 2) else RoundedCornerShape(
+            size.cornerRadius
+        ),
+        contentPadding = contentPadding ?: size.contentPadding,
         interactionSource = interactionSource,
     ) {
-//            if (isLoading) {
-//                RiveAnimation(
-//                    resId = R.raw.loading_dots,
-//                    contentDescription = "loading gif",
-//                    autoplay = true,
-//                    animationName = type.animName,
-//                )
-//            } else {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            contentAlignment = Alignment.Center
         ) {
-            val textColor = MyTheme.colorScheme.labelNormal
-            leftIcon?.let {
-                MyIcon(
-                    modifier = Modifier
-                        .size(20.dp),
-                    id = it,
-                    color = textColor
+            Row(
+                modifier = Modifier
+                    .alpha(if (isLoading) 0f else 1f),
+                horizontalArrangement = Arrangement.spacedBy(size.spacing),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (startIcon != null) {
+                    MyIcon(
+                        modifier = Modifier
+                            .size(size.iconSize),
+                        type = startIcon
+                    )
+                }
+                Text(
+                    text = text,
+                    style = textStyle ?: size.textStyle
                 )
+                if (endIcon != null) {
+                    MyIcon(
+                        modifier = Modifier
+                            .size(size.iconSize),
+                        type = endIcon
+                    )
+                }
             }
-            Text(
-                text = text,
-                style = textStyle ?: MyTheme.typography.bodyBold,
-                color = textColor
-            )
-            rightIcon?.let {
-                MyIcon(
-                    modifier = Modifier
-                        .size(20.dp),
-                    id = it,
-                    color = textColor
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(18.dp),
+                    strokeWidth = 1.5.dp,
+                    color = LocalContentColor.current
                 )
             }
         }
-//            }
     }
 }
 
@@ -165,80 +154,74 @@ fun MyButton(
 @MyPreviews
 private fun Preview() {
     MyTheme {
-        Column(
-            modifier = Modifier
-                .background(MyTheme.colorScheme.backgroundNormal)
-                .padding(10.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+        Surface(
+            color = MyTheme.colorScheme.backgroundNormal
         ) {
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Large
+            LazyColumn(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
+                items(
+                    listOf(
+                        ButtonRole.PRIMARY,
+                        ButtonRole.SECONDARY,
+                        ButtonRole.ASSISTIVE,
+                        ButtonRole.TEXT
+                    )
+                ) { role ->
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(
+                            listOf(
+                                ButtonSize.Larger,
+                                ButtonSize.Large,
+                                ButtonSize.Medium,
+                                ButtonSize.Small
+                            )
+                        ) { size ->
 
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Large,
-                isLoading = true
-            ) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                MyButton(
+                                    text = "button",
+                                    role = role,
+                                    size = size,
+                                    startIcon = IconType.ADD_LINE,
+                                    endIcon = IconType.ADD_LINE
+                                ) { }
 
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Large,
-                enabled = false
-            ) {
+                                MyButton(
+                                    text = "button",
+                                    role = role,
+                                    size = size,
+                                    startIcon = IconType.ADD_LINE,
+                                    endIcon = IconType.ADD_LINE,
+                                    isRounded = true
+                                ) { }
 
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Medium
-            ) {
+                                MyButton(
+                                    text = "button",
+                                    role = role,
+                                    size = size,
+                                    startIcon = IconType.ADD_LINE,
+                                    endIcon = IconType.ADD_LINE,
+                                    isEnabled = false
+                                ) { }
 
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Medium,
-                isLoading = true
-            ) {
-
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Medium,
-                enabled = false
-            ) {
-
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Small
-            ) {
-
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Small,
-                isLoading = true
-            ) {
-
-            }
-            MyButton(
-                text = "시작하기",
-                type = ButtonType.Small,
-                enabled = false
-            ) {
-
-            }
-            MyButton(
-                text = "+",
-                type = ButtonType.Small,
-                enabled = false,
-                textStyle = MyTheme.typography.title1B,
-                contentPadding = PaddingValues(0.dp)
-            ) {
-
+                                MyButton(
+                                    text = "button",
+                                    role = role,
+                                    size = size,
+                                    startIcon = IconType.ADD_LINE,
+                                    endIcon = IconType.ADD_LINE,
+                                    isLoading = true
+                                ) { }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

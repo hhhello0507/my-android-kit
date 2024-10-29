@@ -5,7 +5,12 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,11 +19,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hhhello0507.mydesignsystem.component.avatar.AvatarSize
 import com.hhhello0507.mydesignsystem.component.avatar.MyAvatar
+import com.hhhello0507.mydesignsystem.component.button.ButtonRole
+import com.hhhello0507.mydesignsystem.component.button.ButtonSize
+import com.hhhello0507.mydesignsystem.component.button.MyButton
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.IconType
 import com.hhhello0507.mydesignsystem.layout.BottomTabItem
@@ -30,30 +40,118 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class MyViewModel : ViewModel() {
-    private var _number = MutableStateFlow(0)
-    val number = _number.asStateFlow()
-
-    fun updateNumber() {
-        _number.update { it + 1 }
-    }
-}
-
 @Composable
-fun HomeScreen(
-    viewModel: MyViewModel = viewModel()
-) {
-    val state by viewModel.number.collectAsState()
-
+fun HomeScreen() {
     MyTopAppBar(
         title = "와우"
     ) {
-        LazyColumn {
-            items(100) {
-                Button(
-                    onClick = { viewModel.updateNumber() }
+        LazyColumn(
+            modifier = Modifier.padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            item {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(text = state.toString())
+                    MyButton(
+                        text = "button",
+                        role = ButtonRole.PRIMARY,
+                        size = ButtonSize.Larger,
+                        startIcon = IconType.ADD_LINE,
+                        endIcon = IconType.ADD_LINE,
+                        expanded = true
+                    ) { }
+
+                    MyButton(
+                        text = "button",
+                        role = ButtonRole.PRIMARY,
+                        size = ButtonSize.Larger,
+                        startIcon = IconType.ADD_LINE,
+                        endIcon = IconType.ADD_LINE,
+                        isRounded = true,
+                        expanded = true
+                    ) { }
+
+                    MyButton(
+                        text = "button",
+                        role = ButtonRole.PRIMARY,
+                        size = ButtonSize.Larger,
+                        startIcon = IconType.ADD_LINE,
+                        endIcon = IconType.ADD_LINE,
+                        isEnabled = false,
+                        expanded = true
+                    ) { }
+
+                    MyButton(
+                        text = "button",
+                        role = ButtonRole.PRIMARY,
+                        size = ButtonSize.Larger,
+                        startIcon = IconType.ADD_LINE,
+                        endIcon = IconType.ADD_LINE,
+                        isLoading = true,
+                        expanded = true
+                    ) { }
+                }
+            }
+            items(
+                listOf(
+                    ButtonRole.PRIMARY,
+                    ButtonRole.SECONDARY,
+                    ButtonRole.ASSISTIVE,
+                    ButtonRole.TEXT
+                )
+            ) { role ->
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(
+                        listOf(
+                            ButtonSize.Larger,
+                            ButtonSize.Large,
+                            ButtonSize.Medium,
+                            ButtonSize.Small
+                        )
+                    ) { size ->
+
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            MyButton(
+                                text = "button",
+                                role = role,
+                                size = size,
+                                startIcon = IconType.ADD_LINE,
+                                endIcon = IconType.ADD_LINE
+                            ) { }
+
+                            MyButton(
+                                text = "button",
+                                role = role,
+                                size = size,
+                                startIcon = IconType.ADD_LINE,
+                                endIcon = IconType.ADD_LINE,
+                                isRounded = true
+                            ) { }
+
+                            MyButton(
+                                text = "button",
+                                role = role,
+                                size = size,
+                                startIcon = IconType.ADD_LINE,
+                                endIcon = IconType.ADD_LINE,
+                                isEnabled = false
+                            ) { }
+
+                            MyButton(
+                                text = "button",
+                                role = role,
+                                size = size,
+                                startIcon = IconType.ADD_LINE,
+                                endIcon = IconType.ADD_LINE,
+                                isLoading = true
+                            ) { }
+                        }
+                    }
                 }
             }
         }
