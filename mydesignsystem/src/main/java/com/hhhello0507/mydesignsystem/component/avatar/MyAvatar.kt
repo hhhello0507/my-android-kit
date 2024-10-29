@@ -96,7 +96,7 @@ private fun Preview() {
             color = MyTheme.colorScheme.backgroundNormal
         ) {
             Column {
-                for (size in sizeList) {
+                sizeList.forEach { size ->
                     MyAvatar(size = size)
                 }
             }
