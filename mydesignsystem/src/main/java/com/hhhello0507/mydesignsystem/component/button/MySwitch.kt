@@ -10,35 +10,31 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.elevation.Elevation
 import com.hhhello0507.mydesignsystem.foundation.elevation.shadow
 import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
-
 @Composable
-fun MyToggle(
+fun MySwitch(
     modifier: Modifier = Modifier,
     checked: Boolean,
-    colors: SwitchColors = SwitchDefaults.colors(
-//        checkedThumbColor = MyTheme.colorScheme.background,
-//        checkedTrackColor = MyTheme.colorScheme.buttonPrimary,
-//        uncheckedThumbColor = MyTheme.colorScheme.background,
-//        uncheckedTrackColor = MyTheme.colorScheme.buttonTextDisabled,
-        uncheckedBorderColor = Color.Transparent
-    ),
     onCheckedChange: (Boolean) -> Unit
 ) {
     Switch(
         checked = checked,
         onCheckedChange = onCheckedChange,
-        colors = colors,
+        colors = SwitchDefaults.colors(
+            checkedThumbColor = MyTheme.colorScheme.white,
+            checkedTrackColor = MyTheme.colorScheme.primaryNormal,
+            uncheckedThumbColor = MyTheme.colorScheme.white,
+            uncheckedTrackColor = MyTheme.colorScheme.fillAlternative,
+            uncheckedBorderColor = MyTheme.colorScheme.clear
+        ),
         modifier = modifier
             .height(31.dp)
             .width(51.dp),
@@ -47,7 +43,7 @@ fun MyToggle(
                 modifier = Modifier
                     .size(27.dp)
                     .background(
-                        color = Color.White,
+                        color = MyTheme.colorScheme.white,
                         shape = CircleShape,
                     )
                     .shadow(Elevation.ElevationBlack1),
@@ -66,8 +62,8 @@ private fun Preview() {
                 .padding(10.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            MyToggle(checked = true) {}
-            MyToggle(checked = false) {}
+            MySwitch(checked = true) {}
+            MySwitch(checked = false) {}
         }
     }
 }
