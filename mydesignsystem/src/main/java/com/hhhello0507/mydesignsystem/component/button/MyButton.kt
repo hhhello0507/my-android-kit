@@ -1,9 +1,6 @@
 package com.hhhello0507.mydesignsystem.component.button
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,30 +15,25 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.IconType
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
-import com.hhhello0507.mydesignsystem.internal.ButtonState
 import com.hhhello0507.mydesignsystem.internal.MyPreviews
+import com.hhhello0507.mydesignsystem.internal.bounceAnimation
 
 @Composable
 fun MyButton(
@@ -64,12 +56,6 @@ fun MyButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit,
 ) {
-    var buttonState by remember { mutableStateOf(ButtonState.Idle) }
-    val animatedScale by animateFloatAsState(
-        targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
-        label = "",
-    )
-
     val mergedEnabled = isEnabled && !isLoading
     val mergedStrokeColors = strokeColors ?: role.strokeColors()
     val colorsByRole = role.colors()
@@ -81,6 +67,7 @@ fun MyButton(
     ) else colorsByRole
     val mergedShape = shape ?: RoundedCornerShape(if (isRounded) size.height / 2 else size.cornerRadius)
     val mergedContentSize = contentPadding ?: size.contentPadding
+    val mergedTextStyle = textStyle ?: size.textStyle
 
     Button(
         onClick = {
@@ -92,22 +79,7 @@ fun MyButton(
             .then(if (expanded) Modifier.fillMaxWidth() else Modifier)
             .alpha(if (mergedEnabled) 1f else 0.5f)
             .height(size.height)
-            .graphicsLayer {
-                scaleX = animatedScale
-                scaleY = animatedScale
-            }
-            .pointerInput(buttonState) {
-                if (!mergedEnabled) return@pointerInput
-                awaitPointerEventScope {
-                    buttonState = if (buttonState == ButtonState.Hold) {
-                        waitForUpOrCancellation()
-                        ButtonState.Idle
-                    } else {
-                        awaitFirstDown(false)
-                        ButtonState.Hold
-                    }
-                }
-            }
+            .bounceAnimation(enabled = mergedEnabled)
             .then(
                 if (isStroke) Modifier.border(
                     1.dp,
@@ -139,7 +111,7 @@ fun MyButton(
                 }
                 Text(
                     text = text,
-                    style = textStyle ?: size.textStyle
+                    style = mergedTextStyle
                 )
                 if (endIcon != null) {
                     MyIcon(
