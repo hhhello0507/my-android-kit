@@ -14,21 +14,20 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hhhello0507.mydesignsystem.component.avatar.AvatarSize
 import com.hhhello0507.mydesignsystem.component.avatar.MyAvatar
 import com.hhhello0507.mydesignsystem.component.button.ButtonRole
 import com.hhhello0507.mydesignsystem.component.button.ButtonSize
 import com.hhhello0507.mydesignsystem.component.button.MyButton
+import com.hhhello0507.mydesignsystem.component.dialog.MyDialog
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.iconography.IconType
 import com.hhhello0507.mydesignsystem.layout.BottomTabItem
@@ -36,14 +35,11 @@ import com.hhhello0507.mydesignsystem.layout.MyBottomAppBar
 import com.hhhello0507.mydesignsystem.layout.MyTopAppBar
 import com.hhhello0507.mydesignsystem.layout.TopAppBarButton
 import com.hhhello0507.mydesignsystem.layout.TopAppBarType
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 
 @Composable
-fun HomeScreen() {
+fun ButtonDemo() {
     MyTopAppBar(
-        title = "와우"
+        title = "Button test"
     ) {
         LazyColumn(
             modifier = Modifier.padding(24.dp),
@@ -176,7 +172,7 @@ fun HomeScreen() {
 }
 
 @Composable
-fun ProfileScreen() {
+fun AvatarDemo() {
     val sampleUrl =
         "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg"
     val context = LocalContext.current
@@ -208,6 +204,58 @@ fun ProfileScreen() {
     }
 }
 
+@Composable
+fun DialogDemo() {
+    var showDialog1 by remember { mutableStateOf(false) }
+    var showDialog2 by remember { mutableStateOf(false) }
+
+    MyTopAppBar(
+        title = "Dialog demo"
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+            Button(
+                onClick = {
+                    showDialog1 = true
+                }
+            ) {
+                Text("Show dialog 1")
+            }
+            Button(
+                onClick = {
+                    showDialog2 = true
+                }
+            ) {
+                Text("Show dialog 2")
+            }
+        }
+
+        if (showDialog1) {
+            MyDialog(
+                title = "Title",
+                content = "Content"
+            ) {
+                showDialog1 = false
+            }
+        }
+
+        if (showDialog2) {
+            MyDialog(
+                title = "Title",
+                content = "Content",
+                onSuccessRequest = {
+                    showDialog2 = false
+                },
+                onCancelRequest = {
+                    showDialog2 = false
+                },
+                onDismissRequest = {
+                    showDialog2 = false
+                }
+            )
+        }
+    }
+}
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -223,15 +271,21 @@ class MainActivity : ComponentActivity() {
                     tabs = listOf(
                         BottomTabItem(
                             iconType = IconType.HOME,
-                            text = "홈"
+                            text = "a"
                         ) {
-                            ProfileScreen()
+                            AvatarDemo()
                         },
                         BottomTabItem(
                             iconType = IconType.PERSON,
-                            text = "프로필"
+                            text = "b"
                         ) {
-                            HomeScreen()
+                            ButtonDemo()
+                        },
+                        BottomTabItem(
+                            iconType = IconType.PERSON,
+                            text = "c"
+                        ) {
+                            DialogDemo()
                         }
                     )
                 )

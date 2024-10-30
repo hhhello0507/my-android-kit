@@ -39,7 +39,7 @@ import com.hhhello0507.mydesignsystem.internal.bounceAnimation
 fun MyButton(
     text: String,
     textStyle: TextStyle? = null,
-    size: ButtonSize,
+    size: ButtonSize = ButtonSize.Larger,
     role: ButtonRole = ButtonRole.PRIMARY,
     modifier: Modifier = Modifier,
     startIcon: IconType? = null,
