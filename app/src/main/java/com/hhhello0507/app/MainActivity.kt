@@ -91,6 +91,15 @@ fun HomeScreen() {
                         isLoading = true,
                         expanded = true
                     ) { }
+                    MyButton(
+                        text = "button",
+                        role = ButtonRole.PRIMARY,
+                        size = ButtonSize.Larger,
+                        startIcon = IconType.ADD_LINE,
+                        endIcon = IconType.ADD_LINE,
+                        isStroke = true,
+                        expanded = true
+                    ) { }
                 }
             }
             items(
@@ -149,6 +158,14 @@ fun HomeScreen() {
                                 startIcon = IconType.ADD_LINE,
                                 endIcon = IconType.ADD_LINE,
                                 isLoading = true
+                            ) { }
+                            MyButton(
+                                text = "button",
+                                role = role,
+                                size = size,
+                                startIcon = IconType.ADD_LINE,
+                                endIcon = IconType.ADD_LINE,
+                                isStroke = true
                             ) { }
                         }
                     }

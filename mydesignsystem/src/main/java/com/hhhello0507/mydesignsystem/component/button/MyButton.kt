@@ -1,7 +1,7 @@
 package com.hhhello0507.mydesignsystem.component.button
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -46,31 +45,42 @@ import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 @Composable
 fun MyButton(
-    modifier: Modifier = Modifier,
     text: String,
+    textStyle: TextStyle? = null,
     size: ButtonSize,
     role: ButtonRole = ButtonRole.PRIMARY,
-    textStyle: TextStyle? = null,
-    shape: Shape? = null,
-    contentPadding: PaddingValues? = null,
+    modifier: Modifier = Modifier,
     startIcon: IconType? = null,
     endIcon: IconType? = null,
     isEnabled: Boolean = true,
     isLoading: Boolean = false,
     isRounded: Boolean = false,
+    isStroke: Boolean = false,
     expanded: Boolean = false,
+    shape: Shape? = null,
+    colors: ButtonColors? = null,
+    strokeColors: ButtonStrokeColors? = null,
+    contentPadding: PaddingValues? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit,
 ) {
-    val mergedEnabled = isEnabled && !isLoading
-
     var buttonState by remember { mutableStateOf(ButtonState.Idle) }
-
-    val scale by animateFloatAsState(
+    val animatedScale by animateFloatAsState(
         targetValue = if (buttonState == ButtonState.Idle) 1f else 0.96f,
         label = "",
     )
-    val colors = MyButtonColors.colors(role)
+
+    val mergedEnabled = isEnabled && !isLoading
+    val mergedStrokeColors = strokeColors ?: role.strokeColors()
+    val colorsByRole = role.colors()
+    val mergedColors = colors ?: if (isStroke) ButtonColors(
+        containerColor = MyTheme.colorScheme.clear,
+        contentColor = mergedStrokeColors.strokeContentColor,
+        disabledContainerColor = MyTheme.colorScheme.clear,
+        disabledContentColor = mergedStrokeColors.strokeContentColor
+    ) else colorsByRole
+    val mergedShape = shape ?: RoundedCornerShape(if (isRounded) size.height / 2 else size.cornerRadius)
+    val mergedContentSize = contentPadding ?: size.contentPadding
 
     Button(
         onClick = {
@@ -83,8 +93,8 @@ fun MyButton(
             .alpha(if (mergedEnabled) 1f else 0.5f)
             .height(size.height)
             .graphicsLayer {
-                scaleX = scale
-                scaleY = scale
+                scaleX = animatedScale
+                scaleY = animatedScale
             }
             .pointerInput(buttonState) {
                 if (!mergedEnabled) return@pointerInput
@@ -97,18 +107,18 @@ fun MyButton(
                         ButtonState.Hold
                     }
                 }
-            },
-        colors = ButtonColors(
-            containerColor = colors.containerColor,
-            contentColor = colors.contentColor,
-            disabledContainerColor = colors.containerColor,
-            disabledContentColor = colors.contentColor
-        ),
+            }
+            .then(
+                if (isStroke) Modifier.border(
+                    1.dp,
+                    color = mergedStrokeColors.strokeColor,
+                    shape = RoundedCornerShape(size.cornerRadius)
+                ) else Modifier
+            ),
+        colors = mergedColors,
         enabled = mergedEnabled,
-        shape = shape ?: if (isRounded) RoundedCornerShape(size.height / 2) else RoundedCornerShape(
-            size.cornerRadius
-        ),
-        contentPadding = contentPadding ?: size.contentPadding,
+        shape = mergedShape,
+        contentPadding = mergedContentSize,
         interactionSource = interactionSource,
     ) {
         Box(

@@ -1,7 +1,9 @@
 package com.hhhello0507.mydesignsystem.component.button
 
+import androidx.compose.material3.ButtonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 
 enum class ButtonRole {
@@ -9,41 +11,57 @@ enum class ButtonRole {
     SECONDARY,
     ASSISTIVE,
     TEXT;
-}
 
-data class MyButtonColors(
-    val contentColor: Color,
-    val containerColor: Color,
-    val strokeContentColor: Color,
-    val strokeColor: Color
-) {
-    companion object {
-        @Composable
-        fun colors(role: ButtonRole) = when (role) {
-            ButtonRole.PRIMARY -> MyButtonColors(
-                contentColor = MyTheme.colorScheme.white,
-                containerColor = MyTheme.colorScheme.primaryNormal,
-                strokeContentColor = MyTheme.colorScheme.primaryNormal,
-                strokeColor = MyTheme.colorScheme.primaryNormal
-            )
-            ButtonRole.SECONDARY -> MyButtonColors(
-                contentColor = MyTheme.colorScheme.primaryNormal,
-                containerColor = MyTheme.colorScheme.primaryAssistive,
-                strokeContentColor = MyTheme.colorScheme.primaryNormal,
-                strokeColor = MyTheme.colorScheme.primaryAssistive,
-            )
-            ButtonRole.ASSISTIVE -> MyButtonColors(
-                contentColor = MyTheme.colorScheme.labelNeutral,
-                containerColor = MyTheme.colorScheme.fillNeutral,
-                strokeContentColor = MyTheme.colorScheme.labelNeutral,
-                strokeColor = MyTheme.colorScheme.fillNeutral
-            )
-            ButtonRole.TEXT -> MyButtonColors(
-                contentColor = MyTheme.colorScheme.labelNormal,
-                containerColor = MyTheme.colorScheme.clear,
-                strokeContentColor = MyTheme.colorScheme.clear,
-                strokeColor = MyTheme.colorScheme.clear
-            )
-        }
+    @Composable
+    fun colors(): ButtonColors = when (this) {
+        PRIMARY -> ButtonColors(
+            containerColor = MyTheme.colorScheme.primaryNormal,
+            contentColor = MyTheme.colorScheme.white,
+            disabledContainerColor = MyTheme.colorScheme.primaryNormal,
+            disabledContentColor = MyTheme.colorScheme.white
+        )
+        SECONDARY -> ButtonColors(
+            containerColor = MyTheme.colorScheme.primaryAssistive,
+            contentColor = MyTheme.colorScheme.primaryNormal,
+            disabledContainerColor = MyTheme.colorScheme.primaryAssistive,
+            disabledContentColor = MyTheme.colorScheme.primaryNormal
+        )
+        ASSISTIVE -> ButtonColors(
+            containerColor = MyTheme.colorScheme.fillNeutral,
+            contentColor = MyTheme.colorScheme.labelNeutral,
+            disabledContainerColor = MyTheme.colorScheme.fillNeutral,
+            disabledContentColor = MyTheme.colorScheme.labelNeutral
+        )
+        TEXT -> ButtonColors(
+            containerColor = MyTheme.colorScheme.clear,
+            contentColor = MyTheme.colorScheme.labelNormal,
+            disabledContainerColor = MyTheme.colorScheme.clear,
+            disabledContentColor = MyTheme.colorScheme.labelNormal
+        )
+    }
+
+    @Composable
+    fun strokeColors(): ButtonStrokeColors = when (this) {
+        PRIMARY -> ButtonStrokeColors(
+            strokeContentColor = MyTheme.colorScheme.primaryNormal,
+            strokeColor = MyTheme.colorScheme.primaryNormal
+        )
+        SECONDARY -> ButtonStrokeColors(
+            strokeContentColor = MyTheme.colorScheme.primaryNormal,
+            strokeColor = MyTheme.colorScheme.primaryAssistive,
+        )
+        ASSISTIVE -> ButtonStrokeColors(
+            strokeContentColor = MyTheme.colorScheme.labelNeutral,
+            strokeColor = MyTheme.colorScheme.fillNeutral
+        )
+        TEXT -> ButtonStrokeColors(
+            strokeContentColor = MyTheme.colorScheme.clear,
+            strokeColor = MyTheme.colorScheme.clear
+        )
     }
 }
+
+data class ButtonStrokeColors(
+    val strokeContentColor: Color,
+    val strokeColor: Color
+)
