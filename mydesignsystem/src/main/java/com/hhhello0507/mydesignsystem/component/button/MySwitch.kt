@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchColors
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 import com.hhhello0507.mydesignsystem.foundation.elevation.Elevation
@@ -22,29 +24,43 @@ import com.hhhello0507.mydesignsystem.internal.MyPreviews
 
 @Composable
 fun MySwitch(
-    modifier: Modifier = Modifier,
     checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    colors: SwitchColors = SwitchColors(
+        checkedThumbColor = MyTheme.colorScheme.white,
+        checkedTrackColor = MyTheme.colorScheme.primaryNormal,
+        checkedBorderColor = MyTheme.colorScheme.clear,
+        checkedIconColor = MyTheme.colorScheme.clear,
+        uncheckedThumbColor = MyTheme.colorScheme.white,
+        uncheckedTrackColor = MyTheme.colorScheme.fillAlternative,
+        uncheckedBorderColor = MyTheme.colorScheme.clear,
+        uncheckedIconColor = MyTheme.colorScheme.clear,
+        disabledCheckedThumbColor = MyTheme.colorScheme.white.copy(alpha = 0.5f),
+        disabledCheckedTrackColor = MyTheme.colorScheme.primaryNormal.copy(alpha = 0.5f),
+        disabledCheckedBorderColor = MyTheme.colorScheme.clear,
+        disabledCheckedIconColor = MyTheme.colorScheme.clear,
+        disabledUncheckedThumbColor = MyTheme.colorScheme.white.copy(alpha = 0.5f),
+        disabledUncheckedTrackColor = MyTheme.colorScheme.fillAlternative.copy(alpha = 0.5f),
+        disabledUncheckedBorderColor = MyTheme.colorScheme.clear,
+        disabledUncheckedIconColor = MyTheme.colorScheme.clear
+    ),
     interactionSource: MutableInteractionSource? = null,
 ) {
     Switch(
         checked = checked,
         onCheckedChange = onCheckedChange,
-        colors = SwitchDefaults.colors(
-            checkedThumbColor = MyTheme.colorScheme.white,
-            checkedTrackColor = MyTheme.colorScheme.primaryNormal,
-            uncheckedThumbColor = MyTheme.colorScheme.white,
-            uncheckedTrackColor = MyTheme.colorScheme.fillAlternative,
-            uncheckedBorderColor = MyTheme.colorScheme.clear
-        ),
-        modifier = modifier
-            .height(31.dp)
-            .width(51.dp),
+        modifier = modifier,
+        enabled = enabled,
+        colors = colors,
         thumbContent = {
             Box(
                 modifier = Modifier
                     .size(27.dp)
+                    .scale(1.15f)
                     .background(
+                        // white 고정
                         color = MyTheme.colorScheme.white,
                         shape = CircleShape,
                     )
@@ -67,6 +83,8 @@ private fun Preview() {
         ) {
             MySwitch(checked = true, onCheckedChange = {})
             MySwitch(checked = false, onCheckedChange = {})
+            MySwitch(checked = true, onCheckedChange = {}, enabled = false)
+            MySwitch(checked = false, onCheckedChange = {}, enabled = false)
         }
     }
 }
