@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
+import com.hhhello0507.mydesignsystem.foundation.iconography.IconType
 import com.hhhello0507.mydesignsystem.foundation.iconography.MyIcon
 import com.hhhello0507.mydesignsystem.internal.MyPreviews
-import com.hhhello0507.mydesignsystem.foundation.iconography.IconType
 
 sealed class AvatarSize(
     val size: Dp

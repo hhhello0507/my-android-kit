@@ -66,25 +66,24 @@ fun MySegmentedButtonLayout(
         object : SegmentedIndicatorScope, SegmentedButtonPositionsHolder {
             val segmentedButtonPositions = mutableStateOf<(List<SegmentedButtonPosition>)>(listOf())
 
-            override fun Modifier.segmentedIndicatorLayout(measure: MeasureScope.(Measurable, Constraints, List<SegmentedButtonPosition>) -> MeasureResult): Modifier {
-                return this.layout { measurable: Measurable, constraints: Constraints ->
+            override fun Modifier.segmentedIndicatorLayout(measure: MeasureScope.(Measurable, Constraints, List<SegmentedButtonPosition>) -> MeasureResult) =
+                this.layout { measurable: Measurable, constraints: Constraints ->
                     this.measure(
                         measurable,
                         constraints,
                         segmentedButtonPositions.value,
                     )
                 }
-            }
 
-            override fun Modifier.segmentedIndicatorOffset(selectedNavigationIndex: Int, matchContentSize: Boolean): Modifier {
-                return this.then(
-                    SegmentedIndicatorModifier(
-                        segmentedButtonPositions,
-                        selectedNavigationIndex,
-                        matchContentSize,
-                    ),
-                )
-            }
+
+            override fun Modifier.segmentedIndicatorOffset(
+                selectedNavigationIndex: Int,
+                matchContentSize: Boolean
+            ) = this then SegmentedIndicatorModifier(
+                segmentedButtonPositions,
+                selectedNavigationIndex,
+                matchContentSize,
+            )
 
             override fun setSegmentedButtonPositions(positions: List<SegmentedButtonPosition>) {
                 segmentedButtonPositions.value = positions
@@ -164,11 +163,17 @@ fun MySegmentedButtonLayout(
 
             layout(navigationBarWidth, navigationBarHeight) {
                 indicatorPlaceableList.fastForEach {
-                    it.placeRelative((navItemWidth - it.width) / 2, (navigationBarHeight - it.height) / 2)
+                    it.placeRelative(
+                        (navItemWidth - it.width) / 2,
+                        (navigationBarHeight - it.height) / 2
+                    )
                 }
 
                 navItemPlaceableList.fastForEachIndexed { index, placeable ->
-                    placeable.placeRelative((navItemWidth * index) + ((navItemWidth - placeable.width) / 2), (navigationBarHeight - placeable.height) / 2)
+                    placeable.placeRelative(
+                        (navItemWidth * index) + ((navItemWidth - placeable.width) / 2),
+                        (navigationBarHeight - placeable.height) / 2
+                    )
                 }
             }
         }
@@ -210,7 +215,10 @@ internal class SegmentedIndicatorOffsetNode(
     private var initialOffset: Dp? = null
     private var initialWidth: Dp? = null
 
-    override fun MeasureScope.measure(measurable: Measurable, constraints: Constraints): MeasureResult {
+    override fun MeasureScope.measure(
+        measurable: Measurable,
+        constraints: Constraints
+    ): MeasureResult {
         if (navItemPositionsState.value.isEmpty()) {
             return layout(0, 0) { }
         }
@@ -261,7 +269,10 @@ interface SegmentedIndicatorScope {
         ) -> MeasureResult,
     ): Modifier
 
-    fun Modifier.segmentedIndicatorOffset(selectedNavigationIndex: Int, matchContentSize: Boolean = false): Modifier
+    fun Modifier.segmentedIndicatorOffset(
+        selectedNavigationIndex: Int,
+        matchContentSize: Boolean = false
+    ): Modifier
 }
 
 internal interface SegmentedButtonPositionsHolder {
@@ -275,7 +286,12 @@ data class SegmentedButtonPosition(
 )
 
 @Composable
-fun MySegmentedButton(modifier: Modifier = Modifier, text: String, selected: Boolean, onClick: () -> Unit) {
+fun MySegmentedButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
     Box(
         modifier = modifier
             .height(48.dp)
@@ -293,7 +309,6 @@ fun MySegmentedButton(modifier: Modifier = Modifier, text: String, selected: Boo
         )
     }
 }
-
 
 
 @Composable
