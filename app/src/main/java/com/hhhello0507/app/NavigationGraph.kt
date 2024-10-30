@@ -23,6 +23,9 @@ sealed interface Destination {
     data object Divider : Destination
 
     @Serializable
+    data object SegmentedButton : Destination
+
+    @Serializable
     data object TextField : Destination
 }
 
@@ -37,6 +40,7 @@ fun NavigationGraph(navHostController: NavHostController) {
         composable<Destination.Button> { ButtonScreen(navHostController) }
         composable<Destination.Dialog> { DialogScreen(navHostController) }
         composable<Destination.Divider> { DividerScreen(navHostController) }
+        composable<Destination.SegmentedButton> { SegmentedButtonScreen(navHostController) }
         composable<Destination.TextField> { TextFieldScreen(navHostController) }
     }
 }

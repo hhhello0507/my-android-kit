@@ -24,7 +24,7 @@ fun DialogScreen(navHostController: NavHostController) {
         title = "Dialog",
         type = TopAppBarType.SMALL,
         onBackPressed = {
-            navHostController.popBackStack()
+            navHostController.safePopBackStack()
         }
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {

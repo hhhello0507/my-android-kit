@@ -3,8 +3,10 @@ package com.hhhello0507.mydesignsystem.component.divider
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,6 +21,20 @@ sealed class DividerSize(
     data object Small: DividerSize(size = 1.dp)
     data object Medium: DividerSize(size = 8.dp)
     data object Large: DividerSize(size = 10.dp)
+}
+
+
+@Composable
+fun MyVerticalDivider(
+    modifier: Modifier = Modifier,
+    size: DividerSize = DividerSize.Small,
+    color: Color = MyTheme.colorScheme.lineNormal
+) {
+    VerticalDivider(
+        modifier = modifier,
+        thickness = size.size,
+        color = color
+    )
 }
 
 @Composable
@@ -47,6 +63,14 @@ private fun Preview() {
             MyHorizontalDivider()
             MyHorizontalDivider(size = DividerSize.Medium)
             MyHorizontalDivider(size = DividerSize.Large)
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                MyVerticalDivider()
+                MyVerticalDivider(size = DividerSize.Medium)
+                MyVerticalDivider(size = DividerSize.Large)
+            }
         }
     }
 }

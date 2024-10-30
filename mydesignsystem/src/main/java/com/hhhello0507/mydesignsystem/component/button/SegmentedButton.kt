@@ -23,7 +23,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -36,6 +35,7 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.node.LayoutModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -47,12 +47,59 @@ import com.hhhello0507.mydesignsystem.internal.MyPreviews
 import com.hhhello0507.mydesignsystem.internal.bounceClick
 import kotlinx.coroutines.launch
 
+interface SegmentedButton {
+    val text: String
+}
+
 @Composable
-fun MySegmentedButtonLayout(
-    selectedIndex: Int,
+fun MySegmentedButton(
     modifier: Modifier = Modifier,
+    selected: Int,
+    onChange: (Int) -> Unit,
+    buttons: List<SegmentedButton>,
     containerColor: Color = MyTheme.colorScheme.fillNeutral,
-    shape: Shape = RoundedCornerShape(12.dp),
+    containerShape: Shape = RoundedCornerShape(12.dp),
+    indicatorColor: Color = MyTheme.colorScheme.fillAssistive,
+    indicatorShape: Shape = RoundedCornerShape(10.dp),
+    tonalElevation: Dp = 0.dp,
+    shadowElevation: Dp = 0.dp,
+    border: BorderStroke? = null,
+) {
+    BoxWithConstraints {
+        val itemWidth = maxWidth / buttons.size
+
+        MySegmentedButton(
+            modifier = modifier,
+            selectedIndex = selected,
+            containerColor = containerColor,
+            containerShape = containerShape,
+            indicatorColor = indicatorColor,
+            indicatorShape = indicatorShape,
+            tonalElevation = tonalElevation,
+            shadowElevation = shadowElevation,
+            border = border
+        ) {
+            buttons.fastForEachIndexed { index, button ->
+                MySegmentedButtonItem(
+                    modifier = Modifier.width(itemWidth),
+                    text = button.text,
+                    selected = index == selected,
+                    onClick = {
+                        onChange(index)
+                    }
+                )
+            }
+
+        }
+    }
+}
+
+@Composable
+fun MySegmentedButton(
+    modifier: Modifier = Modifier,
+    selectedIndex: Int,
+    containerColor: Color = MyTheme.colorScheme.fillNeutral,
+    containerShape: Shape = RoundedCornerShape(12.dp),
     indicatorColor: Color = MyTheme.colorScheme.fillAssistive,
     indicatorShape: Shape = RoundedCornerShape(10.dp),
     tonalElevation: Dp = 0.dp,
@@ -95,7 +142,7 @@ fun MySegmentedButtonLayout(
         modifier = Modifier
             .selectableGroup(),
         color = containerColor,
-        shape = shape,
+        shape = containerShape,
         tonalElevation = tonalElevation,
         shadowElevation = shadowElevation,
         border = border,
@@ -286,28 +333,23 @@ data class SegmentedButtonPosition(
 )
 
 @Composable
-fun MySegmentedButton(
+fun MySegmentedButtonItem(
     modifier: Modifier = Modifier,
     text: String,
     selected: Boolean,
     onClick: () -> Unit
 ) {
-    Box(
+    Text(
         modifier = modifier
-            .height(48.dp)
             .bounceClick(
                 onClick = onClick,
-            ),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            modifier = Modifier
-                .alpha(if (selected) 1f else 0.5f),
-            text = text,
-            color = MyTheme.colorScheme.labelNormal,
-            style = MyTheme.typography.headlineM,
-        )
-    }
+            )
+            .alpha(if (selected) 1f else 0.5f),
+        textAlign = TextAlign.Center,
+        text = text,
+        color = MyTheme.colorScheme.labelNormal,
+        style = MyTheme.typography.headlineM
+    )
 }
 
 
@@ -326,16 +368,16 @@ private fun MySegmentedButtonPreview() {
                 val dummyItems: List<String> = listOf("선생님", "학생")
                 val itemWidth = maxWidth / dummyItems.size
                 var selectedTabIndex by remember { mutableIntStateOf(0) }
-                MySegmentedButtonLayout(
+                MySegmentedButton(
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
+                    containerShape = RoundedCornerShape(12.dp),
                     indicatorShape = RoundedCornerShape(8.dp),
                     selectedIndex = selectedTabIndex,
                 ) {
                     dummyItems.fastForEachIndexed { index, text ->
-                        MySegmentedButton(
+                        MySegmentedButtonItem(
                             modifier = Modifier
                                 .width(itemWidth),
                             text = text,
