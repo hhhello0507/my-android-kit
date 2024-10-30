@@ -12,20 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.hhhello0507.mydesignsystem.component.button.MySegmentedButton
-import com.hhhello0507.mydesignsystem.component.button.SegmentedButton
 import com.hhhello0507.mydesignsystem.layout.MyTopAppBar
 import com.hhhello0507.mydesignsystem.layout.TopAppBarType
 
 @Composable
 fun SegmentedButtonScreen(navHostController: NavHostController) {
-    val buttons: List<SegmentedButton> = listOf(
-        object : SegmentedButton {
-            override val text: String = "선생님"
-        },
-        object : SegmentedButton {
-            override val text: String = "학생"
-        }
-    )
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
     MyTopAppBar(
@@ -46,7 +37,7 @@ fun SegmentedButtonScreen(navHostController: NavHostController) {
                 onChange = {
                     selectedTabIndex = it
                 },
-                buttons = buttons
+                buttons = listOf("선생님", "학생")
             )
         }
     }

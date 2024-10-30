@@ -35,6 +35,7 @@ import androidx.compose.ui.layout.layout
 import androidx.compose.ui.node.LayoutModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
@@ -47,16 +48,13 @@ import com.hhhello0507.mydesignsystem.internal.MyPreviews
 import com.hhhello0507.mydesignsystem.internal.bounceClick
 import kotlinx.coroutines.launch
 
-interface SegmentedButton {
-    val text: String
-}
-
 @Composable
 fun MySegmentedButton(
     modifier: Modifier = Modifier,
     selected: Int,
     onChange: (Int) -> Unit,
-    buttons: List<SegmentedButton>,
+    buttons: List<String>,
+    textStyle: TextStyle? = null,
     containerColor: Color = MyTheme.colorScheme.fillNeutral,
     containerShape: Shape = RoundedCornerShape(12.dp),
     indicatorColor: Color = MyTheme.colorScheme.fillAssistive,
@@ -82,14 +80,14 @@ fun MySegmentedButton(
             buttons.fastForEachIndexed { index, button ->
                 MySegmentedButtonItem(
                     modifier = Modifier.width(itemWidth),
-                    text = button.text,
+                    text = button,
                     selected = index == selected,
+                    textStyle = textStyle,
                     onClick = {
                         onChange(index)
                     }
                 )
             }
-
         }
     }
 }
@@ -337,6 +335,7 @@ fun MySegmentedButtonItem(
     modifier: Modifier = Modifier,
     text: String,
     selected: Boolean,
+    textStyle: TextStyle?,
     onClick: () -> Unit
 ) {
     Text(
@@ -348,7 +347,7 @@ fun MySegmentedButtonItem(
         textAlign = TextAlign.Center,
         text = text,
         color = MyTheme.colorScheme.labelNormal,
-        style = MyTheme.typography.headlineM
+        style = textStyle ?: MyTheme.typography.headlineM
     )
 }
 
@@ -382,6 +381,7 @@ private fun MySegmentedButtonPreview() {
                                 .width(itemWidth),
                             text = text,
                             selected = index == selectedTabIndex,
+                            textStyle = MyTheme.typography.bodyMedium
                         ) {
                             selectedTabIndex = index
                         }

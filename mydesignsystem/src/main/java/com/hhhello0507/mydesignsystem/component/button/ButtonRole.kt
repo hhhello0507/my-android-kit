@@ -3,7 +3,6 @@ package com.hhhello0507.mydesignsystem.component.button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
 import com.hhhello0507.mydesignsystem.foundation.MyTheme
 
 enum class ButtonRole {
@@ -55,7 +54,7 @@ enum class ButtonRole {
             strokeColor = MyTheme.colorScheme.fillNeutral
         )
         TEXT -> ButtonStrokeColors(
-            strokeContentColor = MyTheme.colorScheme.clear,
+            strokeContentColor = MyTheme.colorScheme.labelNormal,
             strokeColor = MyTheme.colorScheme.clear
         )
     }
